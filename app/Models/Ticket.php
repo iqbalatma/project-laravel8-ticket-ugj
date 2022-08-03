@@ -10,18 +10,16 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'code',
-        'order_number',
-        'order_status',
         'checkin_status',
-        'name',
-        'phone',
+        'is_printed',
+        'is_generated',
+        'phase_id',
     ];
 
 
-    public function user()
+    public function phase()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Phase::class);
     }
 }

@@ -21,6 +21,7 @@ class CreateTicketsTable extends Migration
             $table->string('checkin_status')->default('Belum Checkin');
             $table->string('name');
             $table->string('phone');
+            $table->boolean('is_printed')->default(0);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

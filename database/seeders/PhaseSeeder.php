@@ -19,26 +19,31 @@ class PhaseSeeder extends Seeder
                 'name' => 'Early',
                 'strdate' => '2022-08-07 00:00:00',
                 'fnshdate' => '2022-08-14 00:00:00',
+                'limit' => 500,
             ],
             [
                 'name' => 'Presale 1',
                 'strdate' => '2022-08-14 00:00:00',
                 'fnshdate' => '2022-09-14 00:00:00',
+                'limit' => 1000,
             ],
             [
                 'name' => 'Presale 2',
                 'strdate' => '2022-09-14 00:00:00',
                 'fnshdate' => '2022-10-14 00:00:00',
+                'limit' => 2000,
             ],
             [
                 'name' => 'Prelase 3',
                 'strdate' => '2022-10-14 00:00:00',
                 'fnshdate' => '2022-10-30 00:00:00',
+                'limit' => 1000,
             ],
             [
                 'name' => 'OTS',
                 'strdate' => '2022-11-12 00:00:00',
                 'fnshdate' => '2022-11-12 00:00:00',
+                'limit' => 500,
             ]
         ];
 

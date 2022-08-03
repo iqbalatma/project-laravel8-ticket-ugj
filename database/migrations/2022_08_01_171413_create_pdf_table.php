@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTicketsTable extends Migration
+class CreatePdfTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateTicketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('docpdf', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable()->uniqid();
-            $table->boolean('is_generated')->default(0);
-            $table->boolean('checkin_status')->default(0);
+            $table->string('name')->nullable();
+            $table->boolean('is_printed')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateTicketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('docpdf');
     }
 }

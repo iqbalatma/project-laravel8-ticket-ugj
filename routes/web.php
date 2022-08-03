@@ -25,19 +25,22 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/qr', [App\Http\Controllers\HomeController::class, 'qr'])->name('add-qr-code');
 Route::get('send-email-pdf', [SendEmailController::class, 'sendmail']);
 
-Route::controller(TicketController::class)->group(function () {
-    Route::get('/ticket', 'index')->name('ticket.index');
-    Route::get('/ticket/confirmed', 'confirmed')->name('ticket.confirmed');
-    Route::get('/ticket/waitingconfirm', 'waitingconfirm')->name('ticket.waitingconfirm');
-    Route::get('/ticket/request', 'create')->name('ticket.create');
-    Route::post('/ticket', 'store')->name('ticket.store');
-    Route::post('/ticket/confirm', 'confirm')->name('ticket.confirm');
-});
 
-Route::controller(ParticipantController::class)->group(function () {
-    Route::get('/participant', 'index')->name('participant.index');
-    Route::get('/participant/admin', 'admin')->name('participant.admin');
+Route::middleware('auth')->group(function () {
+    Route::controller(ParticipantController::class)->group(function () {
+        Route::get('/participant', 'index')->name('participant.index');
+        Route::get('/participant/admin', 'admin')->name('participant.admin');
+    });
+
+    Route::controller(TicketController::class)->group(function () {
+        Route::get('/ticket/generate', 'generate')->name('ticket.generate');
+        Route::get('/ticket/download', 'download')->name('ticket.download');
+        Route::get('/ticket/checkin/{code}', 'checkin')->name('ticket.checkin');
+        // Route::get('/ticket/print', 'print')->name('ticket.print');
+        Route::get('/ticket/generatepdf', 'generatepdf')->name('ticket.generatepdf');
+        Route::post('/ticket/generate', 'store')->name('ticket.store');
+        Route::post('/ticket/download', 'postDownload')->name('ticket.postDownload');
+    });
 });

@@ -62,6 +62,22 @@
       </a>
     </li>
 
+    <li class="menu-item">
+      <a href="{{ route('ticket.generate') }}" class="menu-link">
+        <i class='menu-icon bx bxs-credit-card-front'></i>
+        <div data-i18n="Analytics">Generate New Ticket</div>
+      </a>
+    </li>
+
+
+    <li class="menu-item">
+      <a href="{{ route('ticket.download') }}" class="menu-link">
+        <i class='menu-icon bx bxs-download'></i>
+        <div data-i18n="Analytics">Download Ticket</div>
+      </a>
+    </li>
+
+    {{--
     <!-- User -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -81,9 +97,10 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> --}}
 
 
+    {{--
     <!-- Ticket -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -93,27 +110,22 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="{{ route('ticket.index') }}" class="menu-link">
-            <div data-i18n="Without navbar">Tiket Saya</div>
+          <a href="{{ route('ticket.generate') }}" class="menu-link">
+            <div data-i18n="Without menu">Generate Ticket</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="{{ route('ticket.confirmed') }}" class="menu-link">
-            <div data-i18n="Without navbar">Terkonfirmasi</div>
+          <a href="{{ route('ticket.print') }}" class="menu-link">
+            <div data-i18n="Without menu">Print Ticket</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="{{ route('ticket.waitingconfirm') }}" class="menu-link">
-            <div data-i18n="Without navbar">Menunggu Konfirmasi</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ route('ticket.create') }}" class="menu-link">
-            <div data-i18n="Without menu">Ajukan Tiket</div>
+          <a href="{{ route('ticket.print') }}" class="menu-link">
+            <div data-i18n="Without menu">Checkin</div>
           </a>
         </li>
       </ul>
-    </li>
+    </li> --}}
 
     <!-- Logout -->
     <li class="menu-item">
@@ -125,7 +137,5 @@
         </a>
       </form>
     </li>
-
-
   </ul>
 </aside>

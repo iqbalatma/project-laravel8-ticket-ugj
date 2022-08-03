@@ -2,76 +2,99 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\DocPdf;
+use App\Models\Phase;
 use App\Models\Ticket;
+use App\Services\TicketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Mail;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TicketController extends Controller
 {
-
-    public function index()
+    public function __construct()
+    {
+        $this->ticketService = new TicketService();
+    }
+    // BATAS
+    public function generate()
     {
         $data = [
-            'tickets' => Ticket::where('user_id', Auth::id())->get()
+            "title" => "Generate Ticket"
         ];
-
-        return response()->view('ticket.index', $data);
-    }
-
-    public function create()
-    {
-        return response()->view('ticket.create');
+        return response()->view('ticket.generate', $data);
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:60',
-            'phone' => 'required|max:20',
-            'order_number' => 'required|max:64',
-        ]);
+        $validated = $request->validate(
+            [
+                'phase_id' => 'required',
+                'quantity' => 'required|numeric',
+            ],
+            [
+                'phase_id.required' => 'You have to chose the phase',
+            ]
+        );
 
-        $validated['user_id'] = Auth::id();
+        $quantity = intval($validated['quantity']);
+        $phaseId = intval($validated['phase_id']);
 
-        if (Ticket::create($validated))
+
+        if ($this->ticketService->checkLimit($phaseId, $quantity)) {
+            $this->ticketService->reduceLimit()
+                ->generateData()
+                ->generatePDF();
+
             return  redirect()
-                ->route('ticket.create')
-                ->with('success', "Permintaan tiket telah berhasil dikirim, tiket akan dikirimkan apabila sudah terkonfirmasi.");
+                ->back()
+                ->with('success', "Ticket Generate Success !");
+        } else {
+            return redirect()
+                ->back()
+                ->with('failed', "Ticket generate failed ! Ticket quantity exceeds the limit");
+        }
     }
 
-    public function confirmed()
+    public function download()
     {
         $data = [
-            'tickets' => Ticket::with('user')->where('order_status', 'Confirm')->get()
+            "title" => "Download Ticket",
+            "docpdf" => DocPdf::all()
         ];
-        return response()->view('ticket.confirmed', $data);
+        return response()->view('docpdf.download', $data);
     }
 
-    public function confirm(Request $request)
+    public function postDownload()
     {
-        $ticket_id = $request->input('ticket_id');
-
-        /**
-         * !update_at belum
-         */
-
-        $query =   DB::table('tickets')
-            ->where('id', $ticket_id)
-            ->update([
-                'order_status' => "Confirm",
-                'code' => 'ini adalah code'
-            ]);
-
-        dd($query);
     }
 
-    public function waitingconfirm()
+    public function checkin($code)
     {
-        $data = [
-            'tickets' => Ticket::with('user')->where('order_status', 'On Progress')->get()
-        ];
-        return response()->view('ticket.waitingconfirm', $data);
+        if (!Ticket::where('code', $code)->first()->checkin_status) {
+            if (Ticket::where('code', $code)->update(['checkin_status' => '1'])) {
+                echo "Ticket berhasil checkin";
+            } else {
+                abort(404);
+            }
+        } else {
+            echo "Tiket sudah checkin";
+        }
     }
+
+
+
+    // public function print()
+    // {
+    //     $data = [
+    //         "title" => "Print Ticket",
+    //         'tickets' => Ticket::with('phase')->get()
+    //     ];
+
+    //     return response()->view('ticket.print', $data);
+    // }
 }
