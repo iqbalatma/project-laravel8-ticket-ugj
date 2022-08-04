@@ -7,18 +7,23 @@
     <div class="card h-100">
       <div class="card-header d-flex align-items-center justify-content-between pb-0">
         <div class="card-title mb-0">
-          <h5 class="m-0 me-2">File Tiket</h5>
+          {{-- <h5 class="m-0 me-2">File Tiket</h5> --}}
         </div>
       </div>
       <div class="card-body">
-        <a class="btn btn-primary" href="{{ route('ticket.generatepdf') }}">Print Ticket</a>
+        <form action="{{ route('ticket.postDownload') }}" method="POST">
+          @csrf
+          <button type="submit" class="btn btn-primary">
+            Download Semua File
+          </button>
+        </form>
+
         <table class="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nama File</th>
               <th scope="col">Status Download</th>
-              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -26,14 +31,16 @@
             <tr>
               <td>{{ $doc->id }}</td>
               <td>{{ $doc->name }}</td>
-              <td>{{ $doc->is_printed==1?"Sudah Didownload":"Belum Didownload" }}</td>
               <td>
-                <form action="{{ route('ticket.postDownload') }}" method="POST">
-                  @csrf
-                  <button type="submit" class="btn btn-primary">
-                    Download
-                  </button>
-                </form>
+                @if ($doc->is_printed)
+                <button class="btn btn-secondary" disabled>
+                  Sudah Didownload
+                </button>
+                @else
+                <button class="btn btn-primary" disabled>
+                  Belum Didownload
+                </button>
+                @endif
               </td>
             </tr>
             @endforeach

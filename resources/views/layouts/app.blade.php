@@ -59,6 +59,10 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat/assets/js/config.js') }}"></script>
+
+    @if(Session::has('download.in.the.next.request'))
+    <meta http-equiv="refresh" content="1; url={{ Session::get('download.in.the.next.request') }}">
+    @endif
   </head>
 
   <body>

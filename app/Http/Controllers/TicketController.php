@@ -9,10 +9,14 @@ use App\Services\TicketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Mail;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use ZipArchive;
+use File;
+use Mpdf\Mpdf;
 
 class TicketController extends Controller
 {
@@ -64,13 +68,60 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Download Ticket",
-            "docpdf" => DocPdf::all()
+            // "docpdf" => DocPdf::all()
         ];
-        return response()->view('docpdf.download', $data);
+        // return response()->view('docpdf.download', $data);
+
+
+
+
+
+        $html = view("ticket/pdfticket", $data);
+
+        $mpdf = new \Mpdf\Mpdf([
+          'margin_left' => 10,
+          'margin_right' => 10,
+          'margin_top' => 48,
+          'margin_bottom' => 25,
+          'margin_header' => 10,
+          'margin_footer' => 10,
+          'format' => 'A5-L'
+        ]);
+        $mpdf->SetProtection(array('print'));
+        $mpdf->SetTitle("tes");
+        $mpdf->SetAuthor("RZ TEXTILE");
+        $mpdf->SetDisplayMode('fullpage');
+    
+        $mpdf->WriteHTML($html);
+
+        dd($mpdf);
+        // return $mpdf->Output();
+    
     }
 
     public function postDownload()
     {
+        $dataDoc = DocPdf::where("is_printed", 0)->get();
+        if (count($dataDoc)) {
+            DocPdf::where("is_printed", 0)->update(['is_printed' => 1]);
+
+            File::delete('ticket.zip');
+
+            $zip      = new ZipArchive();
+            $fileName = 'ticket.zip';
+
+            if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+                foreach ($dataDoc as $key => $value) {
+                    $zip->addFile(public_path("ticket/" . $value->name), $value->name);
+                }
+                $zip->close();
+            }
+            // Session::flash('download.in.the.next.request', $fileName);
+            // return redirect()->to('/ticket/download');
+            return response()->download(public_path($fileName));
+        } else {
+            echo "KOSONG";
+        }
     }
 
     public function checkin($code)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -44,3 +45,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/ticket/download', 'postDownload')->name('ticket.postDownload');
     });
 });
+
+
+Route::get('generate-pdf',[PDFController::class,'generatePDF']);
