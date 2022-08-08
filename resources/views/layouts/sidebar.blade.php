@@ -63,7 +63,7 @@
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticket.generate') }}" class="menu-link">
+      <a href="{{ route('ticket.create') }}" class="menu-link">
         <i class='menu-icon bx bxs-credit-card-front'></i>
         <div data-i18n="Analytics">Generate New Ticket</div>
       </a>
@@ -71,7 +71,7 @@
 
 
     <li class="menu-item">
-      <a href="{{ route('ticket.download') }}" class="menu-link">
+      <a href="{{ route('downloadticket.index') }}" class="menu-link">
         <i class='menu-icon bx bxs-download'></i>
         <div data-i18n="Analytics">Download Ticket</div>
       </a>

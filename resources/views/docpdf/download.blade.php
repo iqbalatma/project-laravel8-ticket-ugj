@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="card-body">
-        <form action="{{ route('ticket.postDownload') }}" method="POST">
+        <form action="{{ route('downloadticket.download') }}" method="POST">
           @csrf
           <button type="submit" class="btn btn-primary">
             Download Semua File

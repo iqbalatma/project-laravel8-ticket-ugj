@@ -236,8 +236,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        // 'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-        // 'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 

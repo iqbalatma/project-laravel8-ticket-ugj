@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\ParticipantController;
-use App\Http\Controllers\PDFController;
+use App\Http\Controllers\DownloadTicketController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -26,25 +25,27 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('send-email-pdf', [SendEmailController::class, 'sendmail']);
-
-
-Route::middleware('auth')->group(function () {
-    Route::controller(ParticipantController::class)->group(function () {
-        Route::get('/participant', 'index')->name('participant.index');
-        Route::get('/participant/admin', 'admin')->name('participant.admin');
-    });
-
-    Route::controller(TicketController::class)->group(function () {
-        Route::get('/ticket/generate', 'generate')->name('ticket.generate');
-        Route::get('/ticket/download', 'download')->name('ticket.download');
-        Route::get('/ticket/checkin/{code}', 'checkin')->name('ticket.checkin');
-        // Route::get('/ticket/print', 'print')->name('ticket.print');
-        Route::get('/ticket/generatepdf', 'generatepdf')->name('ticket.generatepdf');
-        Route::post('/ticket/generate', 'store')->name('ticket.store');
-        Route::post('/ticket/download', 'postDownload')->name('ticket.postDownload');
-    });
+Route::get('check',  function ()
+{
+    return view('ticket.pdfticket');
+    
 });
 
 
-Route::get('generate-pdf',[PDFController::class,'generatePDF']);
+Route::middleware('auth')->group(function () {
+    Route::controller(TicketController::class)->group(function () {
+        Route::get('/ticket/create', 'create')->name('ticket.create');
+        Route::get('/ticket/checkin/{code}', 'checkin')->name('ticket.checkin');
+
+
+        Route::get('/ticket/generatepdf', 'generatepdf')->name('ticket.generatepdf');
+        Route::post('/ticket/generate', 'store')->name('ticket.store');
+    });
+
+    Route::controller(DownloadTicketController::class)->group(function ()
+    {
+        Route::get('/ticket/download', 'index')->name('downloadticket.index');
+        Route::post('/ticket/download', 'postDownload')->name('downloadticket.download');
+    });
+});
+
