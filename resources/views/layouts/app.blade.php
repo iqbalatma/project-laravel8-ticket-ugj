@@ -60,6 +60,10 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat/assets/js/config.js') }}"></script>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+
+
     @if(Session::has('download.in.the.next.request'))
     <meta http-equiv="refresh" content="1; url={{ Session::get('download.in.the.next.request') }}">
     @endif
@@ -122,5 +126,12 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="{{ asset('https://buttons.github.io/buttons.js') }}"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script>
+      $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+    </script>
   </body>
 </html>

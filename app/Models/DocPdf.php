@@ -12,5 +12,6 @@ class DocPdf extends Model
   protected $table = "docpdf";
   protected $fillable = [
     'name',
+    'is_printed'
   ];
 }

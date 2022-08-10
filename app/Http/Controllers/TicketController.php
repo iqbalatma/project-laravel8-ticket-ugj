@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DocPdf;
+use App\Models\Phase;
 use App\Models\Ticket;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
@@ -25,8 +26,10 @@ class TicketController extends Controller
     public function create()
     {
         $data = [
-            "title" => "Generate Ticket"
+            "title" => "Generate Ticket",
+            "phases" => Phase::all()
         ];
+
         return response()->view('ticket.generate', $data);
     }
 
@@ -40,7 +43,7 @@ class TicketController extends Controller
         $validated = $request->validate(
             [
                 'phase_id' => 'required',
-                'quantity' => 'required|numeric',
+                'quantity' => 'required|numeric|min:2|max:99',
             ],
             [
                 'phase_id.required' => 'You have to chose the phase',
@@ -56,7 +59,7 @@ class TicketController extends Controller
                 ->generateData()
                 ->generatePDF();
 
-            return  redirect()
+            return redirect()
                 ->back()
                 ->with('success', "Ticket Generate Success !");
         } else {
@@ -78,5 +81,13 @@ class TicketController extends Controller
         } else {
             echo "Tiket sudah checkin";
         }
+    }
+
+    public function tespdf()
+    {
+        $pdf = PDF::loadView('ticket.tespdf');
+      return  $pdf->stream();
+
+    // return response()->view('ticket.tespdf');
     }
 }

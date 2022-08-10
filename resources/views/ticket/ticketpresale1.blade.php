@@ -11,30 +11,22 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table">
+        <table id="myTable" class="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Nama File</th>
-              <th scope="col">Status Download</th>
+              <th scope="col">Code</th>
+              <th scope="col">Status Checkin</th>
+              <th scope="col">Tanggal Generate</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($docpdf as $doc)
+            @foreach ($earlyTickets as $ticket)
             <tr>
-              <td>{{ $doc->id }}</td>
-              <td>{{ $doc->name }}</td>
-              <td>
-                @if ($doc->is_printed)
-                <button class="btn btn-secondary" disabled>
-                  Sudah Didownload
-                </button>
-                @else
-                <a href="/ticket/download/{{ $doc->name }}" class="btn btn-primary">
-                  Download
-                </a>
-                @endif
-              </td>
+              <td>{{ $ticket->id }}</td>
+              <td>{{ $ticket->code }}</td>
+              <td>{{ $ticket->checkin_status }}</td>
+              <td>{{ $ticket->created_at }}</td>
             </tr>
             @endforeach
           </tbody>

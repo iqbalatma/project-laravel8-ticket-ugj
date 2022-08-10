@@ -49,17 +49,14 @@ class TicketService extends Controller
 
     return $this;
   }
-
   public function generatePDF()
   {
-    $dataSetTicket = array_chunk($this->dataTicket, 50, true);
+    $dataSetTicket = array_chunk($this->dataTicket, 100, true);
     $phaseName = str_replace(" ", "_", Phase::find($this->phaseId)->name);
 
     foreach ($dataSetTicket as $key => $ticket) {
-
       $ticketName = $phaseName . "-" . Str::random(8) . ".pdf";
       DocPdf::create(['name' => $ticketName]);
-
       $data['tickets'] = $ticket;
       $pdf = PDF::loadView('ticket.pdfticket', $data);
       $pdf->save("ticket/$ticketName");

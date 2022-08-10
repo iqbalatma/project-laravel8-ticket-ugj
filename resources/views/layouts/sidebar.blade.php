@@ -54,14 +54,6 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
-    <!-- Dashboard -->
-    <li class="menu-item active">
-      <a href="index.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div data-i18n="Analytics">Dashboard</div>
-      </a>
-    </li>
-
     <li class="menu-item">
       <a href="{{ route('ticket.create') }}" class="menu-link">
         <i class='menu-icon bx bxs-credit-card-front'></i>
@@ -77,56 +69,41 @@
       </a>
     </li>
 
-    {{--
-    <!-- User -->
+
     <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class='menu-icon bx bx-user-circle'></i>
-        <div data-i18n="Layouts">User</div>
+      <a href="{{ route('ticketearly.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">Ticket Phase Early</div>
       </a>
+    </li>
 
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="{{ route('participant.index') }}" class="menu-link">
-            <div data-i18n="Without navbar">Peserta</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ route('participant.admin') }}" class="menu-link">
-            <div data-i18n="Without menu">Admin</div>
-          </a>
-        </li>
-      </ul>
-    </li> --}}
-
-
-    {{--
-    <!-- Ticket -->
     <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class='menu-icon bx bxs-credit-card-front'></i>
-        <div data-i18n="Layouts">Ticket</div>
+      <a href="{{ route('ticketpresale1.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">Ticket Phase Presale 1</div>
       </a>
+    </li>
 
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="{{ route('ticket.generate') }}" class="menu-link">
-            <div data-i18n="Without menu">Generate Ticket</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ route('ticket.print') }}" class="menu-link">
-            <div data-i18n="Without menu">Print Ticket</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ route('ticket.print') }}" class="menu-link">
-            <div data-i18n="Without menu">Checkin</div>
-          </a>
-        </li>
-      </ul>
-    </li> --}}
+    <li class="menu-item">
+      <a href="{{ route('ticketpresale2.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">Ticket Phase Presale 2</div>
+      </a>
+    </li>
 
+    <li class="menu-item">
+      <a href="{{ route('ticketpresale3.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">Ticket Phase Presale 3</div>
+      </a>
+    </li>
+
+    <li class="menu-item">
+      <a href="{{ route('ticketots.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">Ticket OTS</div>
+      </a>
+    </li>
     <!-- Logout -->
     <li class="menu-item">
       <form id="logout" action="{{ route('logout') }}" method="POST">

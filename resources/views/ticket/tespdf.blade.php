@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>TICKET FIESTA</title>
+  <title>Laravel 8 Send Email Example</title>
   <style>
     html,
     body,
@@ -160,27 +160,31 @@
       margin-right: 2rem;
       height: 5rem;
       width: 5rem;
+      border-style: solid;
+      border-color: #5F559C;
+      border-width: 3px;
     }
   </style>
 </head>
 
 <body>
-  @foreach ($tickets as $ticket)
-  @php $qrCode=QrCode::backgroundColor(255, 0, 0, 0)->format('png')->size(512)->generate($ticket->code);
-  $qrCode = base64_encode($qrCode);
-  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET.webp")));
-  @endphp
-  <br>
-  <br>
-  <div class="ticket-container">
-    @php
-    echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
-    echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
+  @for ($i = 0; $i < 10; $i++) @php $qrCode=QrCode::format('png')->size(512)->generate("tes");
+    $qrCode = base64_encode($qrCode);
+    $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET.png")));
     @endphp
-  </div>
-  <br>
-  <br>
-  @endforeach
+    <div class="ticket-container">
+      @php
+      echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
+      echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
+      @endphp
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+    @endfor
+
+
 </body>
 
 </html>
