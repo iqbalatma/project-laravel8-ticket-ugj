@@ -149,6 +149,9 @@
       z-index: 5;
       width: 100%;
       margin: auto;
+      border-style: solid;
+      border-color: rgb(255, 255, 255);
+      border-width: 0.07rem;
 
       /* position: absolute; */
     }
@@ -175,16 +178,12 @@
   $qrCode = base64_encode($qrCode);
   $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE1.webp")));
   @endphp
-  <br>
-  <br>
   <div class="ticket-container">
     @php
     echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
     echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
     @endphp
   </div>
-  <br>
-  <br>
   @endforeach
 </body>
 

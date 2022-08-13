@@ -40,14 +40,17 @@ Route::middleware('auth')->group(function () {
     Route::prefix('ticket')->group(function(){
         Route::controller(TicketController::class)->group(function () {
             Route::get('/generate', 'create')->name('ticket.create');
-            Route::get('/check', 'check')->name('ticket.check');
             Route::post('/generate', 'store')->name('ticket.store');
-
+            
             Route::get('/early', 'early')->name('ticket.early');
             Route::get('/presale1', 'presale1')->name('ticket.presale1');
             Route::get('/presale2', 'presale2')->name('ticket.presale2');
             Route::get('/presale3', 'presale3')->name('ticket.presale3');
             Route::get('/ots', 'ots')->name('ticket.ots');
+
+
+            
+            Route::get('/check', 'check')->name('ticket.check');
         });
 
         Route::controller(DownloadTicketController::class)->group(function ()
