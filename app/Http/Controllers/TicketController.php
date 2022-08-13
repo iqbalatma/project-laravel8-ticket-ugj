@@ -47,7 +47,7 @@ class TicketController extends Controller
         $validated = $request->validate(
             [
                 'phase_id' => 'required',
-                'quantity' => 'required|numeric|min:2|max:99',
+                'quantity' => 'required|numeric|min:2|max:100',
             ],
             [
                 'phase_id.required' => 'You have to chose the phase',
