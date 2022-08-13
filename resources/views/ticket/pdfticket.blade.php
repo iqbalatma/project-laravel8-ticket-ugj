@@ -149,6 +149,7 @@
       z-index: 5;
       width: 100%;
       margin: auto;
+
       /* position: absolute; */
     }
 
@@ -156,19 +157,23 @@
       z-index: 10;
       right: 100px;
       float: right;
-      margin-top: -9rem;
+      margin-top: -9.2rem;
       margin-right: 2rem;
-      height: 5rem;
-      width: 5rem;
+      height: 4rem;
+      width: 4rem;
+      border-style: solid;
+      border-color: rgb(255, 255, 255);
+      border-width: 0.1rem;
     }
   </style>
 </head>
 
 <body>
   @foreach ($tickets as $ticket)
-  @php $qrCode=QrCode::backgroundColor(255, 0, 0, 0)->format('png')->size(512)->generate($ticket->code);
+  @php
+  $qrCode=QrCode::format('png')->size(512)->generate($ticket->code);
   $qrCode = base64_encode($qrCode);
-  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET.webp")));
+  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE1.webp")));
   @endphp
   <br>
   <br>

@@ -71,35 +71,35 @@
 
 
     <li class="menu-item">
-      <a href="{{ route('ticketearly.index') }}" class="menu-link">
+      <a href="{{ route('ticket.early') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Early</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticketpresale1.index') }}" class="menu-link">
+      <a href="{{ route('ticket.presale1') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 1</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticketpresale2.index') }}" class="menu-link">
+      <a href="{{ route('ticket.presale2') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 2</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticketpresale3.index') }}" class="menu-link">
+      <a href="{{ route('ticket.presale3') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 3</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticketots.index') }}" class="menu-link">
+      <a href="{{ route('ticket.ots') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket OTS</div>
       </a>

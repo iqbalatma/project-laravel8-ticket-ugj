@@ -20,6 +20,12 @@ class TicketController extends Controller
         $this->ticketService = new TicketService();
     }
 
+    public function check()
+    {
+          $pdf = PDF::loadView('ticket.pdfticket');
+    return      $pdf->stream();
+    }
+
     /**
      * untuk menampilkan halaman tambah ticket / generate ticket
      */
@@ -33,8 +39,6 @@ class TicketController extends Controller
         return response()->view('ticket.generate', $data);
     }
 
-
-    
     /**
      * Operasi untuk melakukan generate ticket
      */
@@ -69,7 +73,7 @@ class TicketController extends Controller
         }
     }
 
-   
+
     public function checkin($code)
     {
         if (!Ticket::where('code', $code)->first()->checkin_status) {
@@ -83,11 +87,55 @@ class TicketController extends Controller
         }
     }
 
-    public function tespdf()
-    {
-        $pdf = PDF::loadView('ticket.tespdf');
-      return  $pdf->stream();
 
-    // return response()->view('ticket.tespdf');
+    // PHASE TICKET
+    public function early()
+    {
+        $data = [
+            "title" => "Ticket Early",
+            "earlyTickets" => Ticket::where('phase_id', 1)->get()
+        ];
+
+        return response()->view("ticket.ticketearly", $data);
+    }
+
+    public function presale1()
+    {
+        $data = [
+            "title" => "Ticket Presale 1",
+            "earlyTickets" => Ticket::where('phase_id', 2)->get()
+        ];
+
+        return response()->view("ticket.ticketpresale1", $data);
+    }
+
+    public function presale2()
+    {
+        $data = [
+            "title" => "Ticket Presale 2",
+            "earlyTickets" => Ticket::where('phase_id', 3)->get()
+        ];
+
+        return response()->view("ticket.ticketpresale2", $data);
+    }
+
+    public function presale3()
+    {
+        $data = [
+            "title" => "Ticket Presale 3",
+            "earlyTickets" => Ticket::where('phase_id', 4)->get()
+        ];
+
+        return response()->view("ticket.ticketpresale3", $data);
+    }
+
+    public function ots()
+    {
+        $data = [
+            "title" => "Ticket OTS",
+            "earlyTickets" => Ticket::where('phase_id', 5)->get()
+        ];
+
+        return response()->view("ticket.ticketots", $data);
     }
 }

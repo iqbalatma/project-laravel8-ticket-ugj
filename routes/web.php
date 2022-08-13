@@ -37,40 +37,24 @@ Route::get('check',  function ()
 
 
 Route::middleware('auth')->group(function () {
-    Route::controller(TicketController::class)->group(function () {
-        Route::get('/ticket/create', 'create')->name('ticket.create');
-        Route::get('/ticket/generatepdf', 'generatepdf')->name('ticket.generatepdf');
+    Route::prefix('ticket')->group(function(){
+        Route::controller(TicketController::class)->group(function () {
+            Route::get('/generate', 'create')->name('ticket.create');
+            Route::get('/check', 'check')->name('ticket.check');
+            Route::post('/generate', 'store')->name('ticket.store');
 
+            Route::get('/early', 'early')->name('ticket.early');
+            Route::get('/presale1', 'presale1')->name('ticket.presale1');
+            Route::get('/presale2', 'presale2')->name('ticket.presale2');
+            Route::get('/presale3', 'presale3')->name('ticket.presale3');
+            Route::get('/ots', 'ots')->name('ticket.ots');
+        });
 
-        Route::post('/ticket/generate', 'store')->name('ticket.store');
-        // Route::get('/ticket/tespdf', 'tespdf')->name('ticket.tespdf');
-    });
-
-    Route::controller(DownloadTicketController::class)->group(function ()
-    {
-        Route::get('/ticket/download', 'index')->name('downloadticket.index');
-        Route::get('/ticket/download/{filename}', 'postDownload')->name('downloadticket.download');
-    });
-
-    Route::controller(TicketEarlyController::class)->group(function ()
-    {
-        Route::get('/ticket/early', 'index')->name('ticketearly.index');
-    });
-    Route::controller(TicketPresale1Controller::class)->group(function ()
-    {
-        Route::get('/ticket/presale1', 'index')->name('ticketpresale1.index');
-    });
-    Route::controller(TicketPresale2Controller::class)->group(function ()
-    {
-        Route::get('/ticket/presale2', 'index')->name('ticketpresale2.index');
-    });
-    Route::controller(TicketPresale3Controller::class)->group(function ()
-    {
-        Route::get('/ticket/presale3', 'index')->name('ticketpresale3.index');
-    });
-    Route::controller(TicketOTSController::class)->group(function ()
-    {
-        Route::get('/ticket/ots', 'index')->name('ticketots.index');
+        Route::controller(DownloadTicketController::class)->group(function ()
+        {
+            Route::get('/download', 'index')->name('downloadticket.index');
+            Route::get('/download/{filename}', 'postDownload')->name('downloadticket.download');
+        });
     });
 });
 
