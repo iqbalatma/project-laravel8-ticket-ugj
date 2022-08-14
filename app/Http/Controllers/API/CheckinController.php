@@ -18,14 +18,14 @@ class CheckinController extends Controller
         return response()->json([
           "message" => "Ticket is already checkin !",
           "status" => 403
-        ]);
+        ])->setStatusCode(403);;
       }
 
       Ticket::where('code', $code)->update(['checkin_status' => '1']);
       return response()->json([
         "message" => "Checkin successfuly !",
         "status" => 200
-      ]);
+      ])->setStatusCode(200);;
     } else {
       return response()->json([
         "message" => "Code is invalid !",
