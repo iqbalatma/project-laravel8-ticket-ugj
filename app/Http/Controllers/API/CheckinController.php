@@ -22,7 +22,7 @@ class CheckinController extends Controller
           "message" => "Ticket is already checkin !",
           "status" => 403,
           "timestamp" => $mytime
-        ])->setStatusCode(403);;
+        ])->setStatusCode(200);;
       }
 
       Ticket::where('code', $code)->update(['checkin_status' => '1']);
@@ -37,7 +37,7 @@ class CheckinController extends Controller
         "message" => "Code is invalid !",
         "status" => 404,
         "timestamp" => $mytime
-      ])->setStatusCode(404);
+      ])->setStatusCode(200);
     }
   }
 }
