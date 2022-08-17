@@ -25,7 +25,12 @@
             <tr>
               <td>{{ $ticket->id }}</td>
               <td>{{ $ticket->code }}</td>
-              <td>{{ $ticket->checkin_status }}</td>
+              <td>@if ($ticket->checkin_status)
+                <button class="btn btn-primary">Sudah Checkin</button>
+                @else
+                <button class="btn btn-secondary">Belum Checkin</button>
+                @endif
+              </td>
               <td>{{ $ticket->created_at }}</td>
             </tr>
             @endforeach

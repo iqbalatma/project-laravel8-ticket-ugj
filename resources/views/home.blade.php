@@ -5,29 +5,12 @@
     <!-- Order Statistics -->
     <div class="order-0 mb-4">
         <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                <div class="card-title mb-0">
-                    <h5 class="m-0 me-2">Order Statistics</h5>
-                    <small class="text-muted">42.82k Total Sales</small>
-                </div>
-                <div class="dropdown">
-                    <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                    </div>
-                </div>
-            </div>
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex flex-column align-items-center gap-1">
-                        <h2 class="mb-2">8,258</h2>
-                        <span>Total Orders</span>
+                        <h2 class="mb-2">8,2582</h2>
+                        <span>Total Ticket</span>
                     </div>
-                    <div id="orderStatisticsChart"></div>
                 </div>
                 <ul class="p-0 m-0">
                     <li class="d-flex mb-4 pb-1">

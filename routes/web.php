@@ -8,6 +8,7 @@ use App\Http\Controllers\TicketOTSController;
 use App\Http\Controllers\TicketPresale1Controller;
 use App\Http\Controllers\TicketPresale2Controller;
 use App\Http\Controllers\TicketPresale3Controller;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,21 +28,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('check',  function ()
-{
+Route::get('check',  function () {
     return view('ticket.pdfticket');
 });
 
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('ticket')->group(function(){
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('user.index')->middleware('isSuperadmin');
+        Route::post('/users', 'store')->name('user.store')->middleware('isSuperadmin');
+    });
+
+    Route::prefix('ticket')->group(function () {
         Route::controller(TicketController::class)->group(function () {
             Route::get('/generate', 'create')->name('ticket.create');
             Route::post('/generate', 'store')->name('ticket.store');
-            
+
             Route::get('/early', 'early')->name('ticket.early');
             Route::get('/presale1', 'presale1')->name('ticket.presale1');
             Route::get('/presale2', 'presale2')->name('ticket.presale2');
@@ -49,15 +54,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/ots', 'ots')->name('ticket.ots');
 
 
-            
+
             Route::get('/check', 'check')->name('ticket.check');
         });
 
-        Route::controller(DownloadTicketController::class)->group(function ()
-        {
+        Route::controller(DownloadTicketController::class)->group(function () {
             Route::get('/download', 'index')->name('downloadticket.index');
             Route::get('/download/{filename}', 'postDownload')->name('downloadticket.download');
         });
     });
 });
-
