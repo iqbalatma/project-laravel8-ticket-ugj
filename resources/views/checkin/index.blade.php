@@ -20,11 +20,11 @@
 
         <div style="width: 1200px" id="reader"></div>
 
-        <select class="form-select" aria-label="Default select example" id="select-checkin">
+        {{-- <select class="form-select" aria-label="Default select example" id="select-checkin">
           @foreach ($tickets as $ticket)
           <option value="{{ $ticket->code }}">{{ $ticket->code }}</option>
           @endforeach
-        </select>
+        </select> --}}
 
 
       </div>
