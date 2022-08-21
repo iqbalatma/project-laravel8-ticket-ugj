@@ -211,6 +211,7 @@
 	"reader", { fps: 1, qrbox: 500 });
 
       function onScanSuccess(decodedText, decodedResult) {
+        console.log(decodedText);
           $.ajax({
                 url: "/api/checkin-web/",
                 type:'POST',
