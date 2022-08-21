@@ -23,6 +23,8 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>{{ $title }}</title>
 
     <meta name="description" content="" />
@@ -135,13 +137,18 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/html5qrcodescanner.js') }}"></script>
     <script>
-      $(function () {
+       $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+      $(function () {
         function onChangeRoll(context) {
             let ticketCode = $(context).val();
 
             $.ajax({
-                url: "/api/checkin-web/",
+                url: "/api/checkin-web",
                 type:'POST',
                 data: {
                   code: ticketCode
@@ -213,7 +220,7 @@
       function onScanSuccess(decodedText, decodedResult) {
         console.log(decodedText);
           $.ajax({
-                url: "/api/checkin-web/",
+                url: "/api/checkin-web",
                 type:'POST',
                 data: {
                   code: decodedText
