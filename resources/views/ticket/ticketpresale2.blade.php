@@ -26,9 +26,9 @@
               <td>{{ $ticket->id }}</td>
               <td>{{ $ticket->code }}</td>
               <td>@if ($ticket->checkin_status)
-                <button class="btn btn-primary">Sudah Checkin</button>
+                <button class="btn btn-primary" disabled>Sudah Checkin</button>
                 @else
-                <button class="btn btn-secondary">Belum Checkin</button>
+                <button class="btn btn-secondary" disabled>Belum Checkin</button>
                 @endif
               </td>
               <td>{{ $ticket->created_at }}</td>

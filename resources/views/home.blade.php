@@ -8,68 +8,47 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex flex-column align-items-center gap-1">
-                        <h2 class="mb-2">8,25382</h2>
+                        <h2 class="mb-2">{{ $totalTickets }}</h2>
                         <span>Total Ticket</span>
                     </div>
                 </div>
-                <ul class="p-0 m-0">
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-mobile-alt"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <h6 class="mb-0">Electronic</h6>
-                                <small class="text-muted">Mobile, Earbuds, TV</small>
-                            </div>
-                            <div class="user-progress">
-                                <small class="fw-semibold">82.5k</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <h6 class="mb-0">Fashion</h6>
-                                <small class="text-muted">T-shirt, Jeans, Shoes</small>
-                            </div>
-                            <div class="user-progress">
-                                <small class="fw-semibold">23.8k</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <h6 class="mb-0">Decor</h6>
-                                <small class="text-muted">Fine Art, Dining</small>
-                            </div>
-                            <div class="user-progress">
-                                <small class="fw-semibold">849k</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="d-flex">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-football"></i></span>
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <h6 class="mb-0">Sports</h6>
-                                <small class="text-muted">Football, Cricket Kit</small>
-                            </div>
-                            <div class="user-progress">
-                                <small class="fw-semibold">99</small>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fase Tiket</th>
+                            <th scope="col">Jumlah Tiket</th>
+                            <th scope="col">Jumlah Tiket Checkin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Tiket Fase Early</th>
+                            <th scope="row">{{ $totalTicketEarly }}</th>
+                            <th scope="row">{{ $totalTicketEarlyCheckin }}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tiket Fase Presale 1</th>
+                            <th scope="row">{{ $totalTicketPresale1 }}</th>
+                            <th scope="row">{{ $totalTicketPresale1Checkin }}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tiket Fase Presale 2</th>
+                            <th scope="row">{{ $totalTicketPresale2 }}</th>
+                            <th scope="row">{{ $totalTicketPresale2Checkin }}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tiket Fase Presale 3</th>
+                            <th scope="row">{{ $totalTicketPresale3 }}</th>
+                            <th scope="row">{{ $totalTicketPresale3Checkin }}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tiket Fase OTS</th>
+                            <th scope="row">{{ $totalTicketOTS }}</th>
+                            <th scope="row">{{ $totalTicketOTSCheckin }}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
