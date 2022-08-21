@@ -146,6 +146,14 @@
 
       $('#update-user-modal').modal('show');
     });
+
+
+    $(document).on("click", ".delete-user-trigger", function () {
+      let id = $(this).data('id');
+      $("#delete-user-modal #idDelete").val(id);
+
+      $('#delete-user-modal').modal('show');
+    });
     </script>
   </body>
 </html>

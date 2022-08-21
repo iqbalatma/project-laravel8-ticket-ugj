@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonalAccessToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,6 +43,16 @@ class UserController extends Controller
         $validated['password'] = bcrypt($validated['password']);
         User::where('id', $validated['id'])
             ->update($validated);
+        PersonalAccessToken::where('tokenable_id', $validated['id'])->delete();
         return redirect()->route('user.index')->with('success', 'Update ' . $validated['name'] . ' successfuly');
+    }
+
+    public function delete(Request $request)
+    {
+        $userId = $request->all()['id'];
+        User::destroy($userId);
+        PersonalAccessToken::where('tokenable_id', $userId)->delete();
+
+        return redirect()->route('user.index')->with('success', 'Delete user successfuly');
     }
 }

@@ -75,6 +75,9 @@
                 <button type="button" class="btn btn-primary update-user-trigger" data-bs-toggle="modal" data-id="{{ $user->id }}" data-email="{{ $user->email }}" data-name="{{ $user->name }}">
                   Ganti Password
                 </button>
+                <button type="button" class="btn btn-danger delete-user-trigger" data-bs-toggle="modal" data-id="{{ $user->id }}">
+                  Hapus User
+                </button>
               </td>
             </tr>
             @endforeach
@@ -86,8 +89,8 @@
   <!--/ Order Statistics -->
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="update-user-modal" tabindex="-1" aria-labelledby="update-modalLabel" aria-hidden="true">
+<!-- Modal Update User-->
+<div class="modal fade" id="update-user-modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -122,6 +125,30 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
           <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Update User-->
+<div class="modal fade" id="delete-user-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hapus User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{ route('user.update') }}" method="POST">
+        @csrf
+        @method("DELETE")
+        <div class="modal-body">
+          <input type="hidden" name="id" id="idDelete">
+          <p>Apakah anda yakin ingin menghapus user ini ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-danger">Konfirmasi</button>
         </div>
       </form>
     </div>

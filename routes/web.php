@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users', 'index')->name('user.index')->middleware('isSuperadmin');
         Route::post('/users', 'store')->name('user.store')->middleware('isSuperadmin');
         Route::put('/users', 'update')->name('user.update')->middleware('isSuperadmin');
+        Route::delete('/users', 'delete')->name('user.delete')->middleware('isSuperadmin');
     });
 
     Route::prefix('ticket')->group(function () {
