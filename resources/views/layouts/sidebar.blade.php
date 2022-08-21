@@ -118,7 +118,7 @@
     @if (Auth::user()->role_id == 1)
     <li class="menu-item">
       <a href="{{ route('user.index') }}" class="menu-link">
-        <i class='menu-icon bx bx-qr'></i>
+        <i class='menu-icon bx bxs-user-circle'></i>
         <div data-i18n="Analytics">User</div>
       </a>
     </li>
