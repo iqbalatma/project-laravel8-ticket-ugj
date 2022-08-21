@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CheckinController::class)->group(function () {
         Route::get('/checkin', 'index')->name('checkin.index');
+        Route::post('/checkin', 'checkin')->name('checkin.checkin');
     });
 
     Route::prefix('ticket')->group(function () {
