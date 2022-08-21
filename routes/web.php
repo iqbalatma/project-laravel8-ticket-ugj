@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\DownloadTicketController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\TicketController;
@@ -42,6 +43,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/users', 'store')->name('user.store')->middleware('isSuperadmin');
         Route::put('/users', 'update')->name('user.update')->middleware('isSuperadmin');
         Route::delete('/users', 'delete')->name('user.delete')->middleware('isSuperadmin');
+    });
+
+    Route::controller(CheckinController::class)->group(function () {
+        Route::get('/checkin', 'index')->name('checkin.index');
     });
 
     Route::prefix('ticket')->group(function () {

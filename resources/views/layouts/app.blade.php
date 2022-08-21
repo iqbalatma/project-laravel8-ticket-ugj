@@ -67,6 +67,8 @@
     @if(Session::has('download.in.the.next.request'))
     <meta http-equiv="refresh" content="1; url={{ Session::get('download.in.the.next.request') }}">
     @endif
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/css/selectize.bootstrap5.css" integrity="sha512-wD3+yEMEGhx4+wKKWd0bNGCI+fxhDsK7znFYPvf2wOVxpr7gWnf4+BKphWnUCzf49AUAF6GYbaCBws1e5XHSsg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
   <body>
@@ -128,6 +130,135 @@
     <script async defer src="{{ asset('https://buttons.github.io/buttons.js') }}"></script>
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.js" integrity="sha512-X6kWCt4NijyqM0ebb3vgEPE8jtUu9OGGXYGJ86bXTm3oH+oJ5+2UBvUw+uz+eEf3DcTTfJT4YQu/7F6MRV+wbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/html5qrcodescanner.js') }}"></script>
+    <script>
+      $(function () {
+
+        function onChangeRoll(context) {
+            let ticketCode = $(context).val();
+
+            $.ajax({
+                url: "/api/checkin-web/",
+                type:'POST',
+                data: {
+                  code: ticketCode
+                },
+                context: document.body,
+            }).done(function(result) {
+              console.log(result);
+              let status = result.status;
+              let message = result.message;
+              if(status==200){
+                return Swal.fire({
+                    icon: "success",
+                    title: "Berhasil checkin !",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
+              }
+
+              if(status==403){
+                return Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Ticket anda sudah pernah checkin !',
+                  showConfirmButton: false,
+                  timer: 1000,
+                })
+              }
+
+              if(status==404){
+                return Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Kode tiket invalid !',
+                  showConfirmButton: false,
+                  timer: 1000,
+                })
+              }
+            });
+        }
+
+
+        $("#select-checkin").on("change", function() {
+           onChangeRoll(this);
+        });
+
+
+       let selectized =  $("#select-checkin").selectize({
+          openOnFocus:false
+        });
+
+        selectized[0].selectize.focus();
+
+        selectized[0].selectize.on("focus", function() {
+            $("#select-checkin").unbind("change");
+            selectized[0].selectize.clear();
+            selectized[0].selectize.focus();
+            $("#select-checkin").bind("change", function() {
+                onChangeRoll(this);
+            });
+        });
+
+
+      });
+
+
+
+
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+	"reader", { fps: 1, qrbox: 500 });
+
+      function onScanSuccess(decodedText, decodedResult) {
+          $.ajax({
+                url: "/api/checkin-web/",
+                type:'POST',
+                data: {
+                  code: decodedText
+                },
+                context: document.body,
+            }).done(function(result) {
+              console.log(result);
+              let status = result.status;
+              let message = result.message;
+              if(status==200){
+                return Swal.fire({
+                    icon: "success",
+                    title: "Berhasil checkin !",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
+              }
+
+              if(status==403){
+                return Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Ticket anda sudah pernah checkin !',
+                  showConfirmButton: false,
+                  timer: 1000,
+                })
+              }
+
+              if(status==404){
+                return Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Kode tiket invalid !',
+                  showConfirmButton: false,
+                  timer: 1000,
+                })
+              }
+            });
+      }
+
+      function onScanError(errorMessage) {
+    // handle on error condition, with error message
+    console.log(errorMessage);
+}
+
+html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+    </script>
     <script>
       $(document).ready( function () {
         $('#myTable').DataTable({

@@ -20,3 +20,6 @@ Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login'])
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/checkin', [App\Http\Controllers\API\CheckinController::class, 'checkin']);
 });
+
+
+Route::post('/checkin-web', [App\Http\Controllers\API\CheckinController::class, 'checkin']);

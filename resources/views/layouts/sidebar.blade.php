@@ -124,6 +124,13 @@
     </li>
     @endif
 
+    <li class="menu-item">
+      <a href="{{ route('checkin.index') }}" class="menu-link">
+        <i class='menu-icon bx bxs-check-circle'></i>
+        <div data-i18n="Analytics">Checkin</div>
+      </a>
+    </li>
+
 
     <!-- Logout -->
     <li class="menu-item">
