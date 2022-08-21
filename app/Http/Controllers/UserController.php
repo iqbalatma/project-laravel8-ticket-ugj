@@ -20,7 +20,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // validated email
         $validated =   $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
@@ -30,5 +29,19 @@ class UserController extends Controller
         $validated['password'] = bcrypt($validated['password']);
         User::create($validated);
         return redirect()->route('user.index')->with('success', 'Add new user successfuly');
+    }
+
+    public function update(Request $request)
+    {
+        $validated =   $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'id' => 'required'
+        ]);
+        $validated['password'] = bcrypt($validated['password']);
+        User::where('id', $validated['id'])
+            ->update($validated);
+        return redirect()->route('user.index')->with('success', 'Update ' . $validated['name'] . ' successfuly');
     }
 }

@@ -130,8 +130,22 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script>
       $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+        $('#myTable').DataTable();
+      } );
+
+
+
+    $(document).on("click", ".update-user-trigger", function () {
+      let name = $(this).data('name');
+      let id = $(this).data('id');
+      let email = $(this).data('email');
+
+      $("#update-user-modal #id").val(id);
+      $("#update-user-modal #name").val(name);
+      $("#update-user-modal #email").val(email);
+
+      $('#update-user-modal').modal('show');
+    });
     </script>
   </body>
 </html>
