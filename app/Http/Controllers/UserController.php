@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,40 +13,35 @@ class UserController extends Controller
 {
     public function index(): Response
     {
-        $data = [
+        return response()->view('users.index', [
             'title' => 'User',
             'users' => User::where('role_id', 4)->get()
-        ];
-
-        return response()->view('users.index', $data);
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $validated =   $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
-        ]);
-        $validated['role_id'] = 4;
+        $validated = $request->validated();
         $validated['password'] = bcrypt($validated['password']);
         User::create($validated);
-        return redirect()->route('user.index')->with('success', 'Add new user successfuly');
+
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'Add new user successfuly');
     }
 
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request)
     {
-        $validated =   $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'id' => 'required'
-        ]);
+        $validated =  $request->validated();
         $validated['password'] = bcrypt($validated['password']);
-        User::where('id', $validated['id'])
+        $user = User::where('id', $validated['id'])
             ->update($validated);
-        PersonalAccessToken::where('tokenable_id', $validated['id'])->delete();
-        return redirect()->route('user.index')->with('success', 'Update ' . $validated['name'] . ' successfuly');
+        PersonalAccessToken::where('tokenable_id', $user->id)
+            ->delete();
+
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'Update ' . $validated['name'] . ' successfuly');
     }
 
     public function delete(Request $request)

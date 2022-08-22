@@ -214,8 +214,8 @@
 
 
 
-      var html5QrcodeScanner = new Html5QrcodeScanner(
-	        "reader", { fps: 1, qrbox: 500 });
+      let html5QrcodeScanner = new Html5QrcodeScanner(
+	        "reader", { fps: 1,  qrbox : { width: 600, height: 600 } });
 
       function onScanSuccess(decodedText, decodedResult) {
         console.log(decodedText);

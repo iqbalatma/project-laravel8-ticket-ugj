@@ -18,7 +18,15 @@
         </div>
         @endif
 
-        <div style="width: 1200px" id="reader"></div>
+        <div class="d-none d-md-block">
+          <p>Ukuran layar tidak support</p>
+        </div>
+
+        <div class="row d-md-none">
+          <div class="col">
+            <div style="width: 100%" id="reader"></div>
+          </div>
+        </div>
 
         <select class="form-select" aria-label="Default select example" id="select-checkin">
           @foreach ($tickets as $ticket)
