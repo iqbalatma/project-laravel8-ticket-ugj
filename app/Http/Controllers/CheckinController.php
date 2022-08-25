@@ -12,11 +12,29 @@ class CheckinController extends Controller
 {
     public function index()
     {
-        return response()->view('checkin.index', [
+        return response()->view('checkin.narrow-screen', [
             'title' => 'Checkin',
             'tickets' => Ticket::all(),
         ]);
     }
+
+    public function wide()
+    {
+        return response()->view('checkin.wide-screen', [
+            'title' => 'Checkin',
+            'tickets' => Ticket::all(),
+        ]);
+    }
+
+    public function scannerTool()
+    {
+        return response()->view('checkin.scanner-tools', [
+            'title' => 'Checkin',
+            'tickets' => Ticket::all(),
+        ]);
+    }
+
+    
 
     public function checkin(Request $request)
     {
@@ -41,7 +59,6 @@ class CheckinController extends Controller
                 "status" => 200,
                 "timestamp" => $mytime,
                 "checkin_date" =>  $ticket->updated_at->format('H:i:s')
-
             ])->setStatusCode(200);;
         } else {
             return response()->json([

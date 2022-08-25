@@ -124,10 +124,26 @@
     </li>
     @endif
 
+    <hr>
+
     <li class="menu-item">
       <a href="{{ route('checkin.index') }}" class="menu-link">
+        <i class='menu-icon bx bx-mobile'></i>
+        <div data-i18n="Analytics">Checkin Mobile</div>
+      </a>
+    </li>
+
+    <li class="menu-item">
+      <a href="{{ route('checkin.wide') }}" class="menu-link">
         <i class='menu-icon bx bxs-check-circle'></i>
-        <div data-i18n="Analytics">Checkin</div>
+        <div data-i18n="Analytics">Checkin Website</div>
+      </a>
+    </li>
+
+    <li class="menu-item">
+      <a href="{{ route('checkin.scanner-tools') }}" class="menu-link">
+        <i class='menu-icon bx bx-rename'></i>
+        <div data-i18n="Analytics">Checkin Scanner Tool</div>
       </a>
     </li>
 
