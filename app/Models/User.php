@@ -53,4 +53,9 @@ class User extends Authenticatable
         $this->password = bcrypt($password);
         return $this;
     }
+
+    public function ticket()
+    {
+      return $this->hasMany(Ticket::class);
+    }
 }

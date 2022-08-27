@@ -34,7 +34,7 @@ class CheckinController extends Controller
         ]);
     }
 
-    
+
 
     public function checkin(Request $request)
     {
@@ -53,12 +53,12 @@ class CheckinController extends Controller
                 ])->setStatusCode(200);;
             }
 
-            Ticket::where('code', $code)->update(['checkin_status' => '1', 'updated_at' => now()]);
+            Ticket::where('code', $code)->update(['checkin_status' => '1', 'updated_at' => now(), "user_id" => Auth::user()->id,]);
             return response()->json([
                 "message" => "Checkin successfuly !",
                 "status" => 200,
                 "timestamp" => $mytime,
-                "checkin_date" =>  $ticket->updated_at->format('H:i:s')
+                "user_id" => Auth::user()->id,
             ])->setStatusCode(200);;
         } else {
             return response()->json([

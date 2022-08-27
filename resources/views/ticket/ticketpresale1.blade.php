@@ -17,7 +17,8 @@
               <th scope="col">ID</th>
               <th scope="col">Code</th>
               <th scope="col">Status Checkin</th>
-              <th scope="col">Tanggal Generate</th>
+              <th scope="col">Tanggal Checkin</th>
+              <th scope="col">Inspektor</th>
             </tr>
           </thead>
           <tbody>
@@ -31,7 +32,8 @@
                 <button class="btn btn-secondary" disabled>Belum Checkin</button>
                 @endif
               </td>
-              <td>{{ $ticket->created_at }}</td>
+              <td>{{ $ticket->updated_at }}</td>
+              <td>{{ $ticket->user->name ?? "-" }} </td>
             </tr>
             @endforeach
           </tbody>

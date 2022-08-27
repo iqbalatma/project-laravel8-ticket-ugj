@@ -22,4 +22,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Phase::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

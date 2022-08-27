@@ -75,9 +75,6 @@
                 <button type="button" class="btn btn-primary update-user-trigger" data-bs-toggle="modal" data-id="{{ $user->id }}" data-email="{{ $user->email }}" data-name="{{ $user->name }}">
                   Ganti Password
                 </button>
-                <button type="button" class="btn btn-danger delete-user-trigger" data-bs-toggle="modal" data-id="{{ $user->id }}">
-                  Hapus User
-                </button>
               </td>
             </tr>
             @endforeach
@@ -131,7 +128,7 @@
   </div>
 </div>
 
-<!-- Modal Update User-->
+<!-- Modal Delete User-->
 <div class="modal fade" id="delete-user-modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -154,4 +151,35 @@
     </div>
   </div>
 </div>
+@endsection
+
+
+@section('page-script')
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable({
+      order: [[2, 'desc']],
+    });
+  });
+
+  $(document).on("click", ".update-user-trigger", function () {
+    let name = $(this).data('name');
+    let id = $(this).data('id');
+    let email = $(this).data('email');
+
+    $("#update-user-modal #id").val(id);
+    $("#update-user-modal #name").val(name);
+    $("#update-user-modal #email").val(email);
+
+    $('#update-user-modal').modal('show');
+  });
+
+
+  $(document).on("click", ".delete-user-trigger", function () {
+    let id = $(this).data('id');
+    $("#delete-user-modal #idDelete").val(id);
+
+    $('#delete-user-modal').modal('show');
+  });
+</script>
 @endsection

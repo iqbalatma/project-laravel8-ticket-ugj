@@ -131,170 +131,20 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="{{ asset('https://buttons.github.io/buttons.js') }}"></script>
 
+
+
+
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.js" integrity="sha512-X6kWCt4NijyqM0ebb3vgEPE8jtUu9OGGXYGJ86bXTm3oH+oJ5+2UBvUw+uz+eEf3DcTTfJT4YQu/7F6MRV+wbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/html5qrcodescanner.js') }}"></script>
-    <script>
-       $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            }
-        });
+    @yield('page-script')
 
-      $(function () {
-        function onChangeRoll(context) {
-            let ticketCode = $(context).val();
-
-            $.ajax({
-                url: "{{ route('checkin.checkin') }}",
-                type:'POST',
-                data: {
-                  code: ticketCode
-                },
-                context: document.body,
-            }).done(function(result) {
-              console.log(result);
-              let status = result.status;
-              let message = result.message;
-              if(status==200){
-                return Swal.fire({
-                    icon: "success",
-                    title: "Berhasil checkin !",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-              }
-
-              if(status==403){
-                return Swal.fire({
-                  icon: 'error',
-                  title: `Oops...Ticket anda sudah pernah checkin pada ${result.checkin_date}!`,
-                  showConfirmButton: false,
-                  timer: 1500,
-                })
-              }
-
-              if(status==404){
-                return Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...Kode tiket invalid !',
-                  showConfirmButton: false,
-                  timer: 1500,
-                })
-              }
-            });
-        }
-
-
-        $("#select-checkin").on("change", function() {
-           onChangeRoll(this);
-        });
-
-
-       let selectized =  $("#select-checkin").selectize({
-          openOnFocus:false
-        });
-
-        selectized[0].selectize.focus();
-
-        selectized[0].selectize.on("focus", function() {
-            $("#select-checkin").unbind("change");
-            selectized[0].selectize.clear();
-            selectized[0].selectize.focus();
-            $("#select-checkin").bind("change", function() {
-                onChangeRoll(this);
-            });
-        });
-
-
-      });
-
-
-
-
-      let html5QrcodeScanner = new Html5QrcodeScanner(
-	        "reader", { fps: 1,  qrbox : { width: 600, height: 600 } });
-
-      function onScanSuccess(decodedText, decodedResult) {
-        console.log(decodedText);
-          $.ajax({
-                url: "{{ route('checkin.checkin') }}",
-                type:'POST',
-                data: {
-                  code: decodedText
-                },
-                context: document.body,
-            }).done(function(result) {
-              console.log(result);
-              let status = result.status;
-              let message = result.message;
-              if(status==200){
-                return Swal.fire({
-                    icon: "success",
-                    title: "Berhasil checkin !",
-                    showConfirmButton: false,
-                          timer: 1500,
-                });
-              }
-
-              if(status==403){
-                return Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...Ticket anda sudah pernah checkin !',
-                  showConfirmButton: false,
-                        timer: 1500,
-                })
-              }
-
-              if(status==404){
-                return Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...Kode tiket invalid !',
-                  showConfirmButton: false,
-                        timer: 1500,
-                })
-              }
-            });
-      }
-
-      function onScanError(errorMessage) {
-    // handle on error condition, with error message
-    console.log(errorMessage);
-}
-
-html5QrcodeScanner.render(onScanSuccess, onScanError);
-
-    </script>
     <script>
       $(document).ready( function () {
         $('#myTable').DataTable({
           order: [[2, 'desc']],
         });
       } );
-
-
-
-    $(document).on("click", ".update-user-trigger", function () {
-      let name = $(this).data('name');
-      let id = $(this).data('id');
-      let email = $(this).data('email');
-
-      $("#update-user-modal #id").val(id);
-      $("#update-user-modal #name").val(name);
-      $("#update-user-modal #email").val(email);
-
-      $('#update-user-modal').modal('show');
-    });
-
-
-    $(document).on("click", ".delete-user-trigger", function () {
-      let id = $(this).data('id');
-      $("#delete-user-modal #idDelete").val(id);
-
-      $('#delete-user-modal').modal('show');
-    });
     </script>
   </body>
 </html>

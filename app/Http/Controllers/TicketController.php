@@ -22,8 +22,8 @@ class TicketController extends Controller
 
     public function check()
     {
-          $pdf = PDF::loadView('ticket.pdfticket');
-    return      $pdf->stream();
+        $pdf = PDF::loadView('ticket.pdfticket');
+        return  $pdf->stream();
     }
 
     /**
@@ -93,7 +93,7 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Ticket Early",
-            "earlyTickets" => Ticket::where('phase_id', 1)->get()
+            "earlyTickets" => Ticket::with("user")->where('phase_id', 1)->get(),
         ];
 
         return response()->view("ticket.ticketearly", $data);
@@ -103,7 +103,7 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Ticket Presale 1",
-            "earlyTickets" => Ticket::where('phase_id', 2)->get()
+            "earlyTickets" => Ticket::with("user")->where('phase_id', 2)->get(),
         ];
 
         return response()->view("ticket.ticketpresale1", $data);
@@ -113,7 +113,7 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Ticket Presale 2",
-            "earlyTickets" => Ticket::where('phase_id', 3)->get()
+            "earlyTickets" => Ticket::with("user")->where('phase_id', 3)->get(),
         ];
 
         return response()->view("ticket.ticketpresale2", $data);
@@ -123,7 +123,7 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Ticket Presale 3",
-            "earlyTickets" => Ticket::where('phase_id', 4)->get()
+            "earlyTickets" => Ticket::with("user")->where('phase_id', 4)->get(),
         ];
 
         return response()->view("ticket.ticketpresale3", $data);
@@ -133,7 +133,7 @@ class TicketController extends Controller
     {
         $data = [
             "title" => "Ticket OTS",
-            "earlyTickets" => Ticket::where('phase_id', 5)->get()
+            "earlyTickets" => Ticket::with("user")->where('phase_id', 5)->get(),
         ];
 
         return response()->view("ticket.ticketots", $data);
