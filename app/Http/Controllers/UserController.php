@@ -8,6 +8,7 @@ use App\Models\PersonalAccessToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -34,9 +35,11 @@ class UserController extends Controller
     {
         $validated =  $request->validated();
         $validated['password'] = bcrypt($validated['password']);
-        $user = User::where('id', $validated['id'])
-            ->update($validated);
-        PersonalAccessToken::where('tokenable_id', $user->id)
+
+        $user = User::where('id', $validated['id']);
+        $dataUser = $user->first();
+        $user->update($validated);
+        PersonalAccessToken::where('tokenable_id', $dataUser->id)
             ->delete();
 
         return redirect()
@@ -49,7 +52,6 @@ class UserController extends Controller
         $userId = $request->all()['id'];
         User::destroy($userId);
         PersonalAccessToken::where('tokenable_id', $userId)->delete();
-
         return redirect()->route('user.index')->with('success', 'Delete user successfuly');
     }
 }

@@ -55,7 +55,7 @@
           </div>
           <div class="col-lg-6">
             <small class="text-light fw-semibold">Form Generate Ticket</small>
-            <form method="POST" action="{{ route('ticket.store') }}">
+            <form method="POST" action="{{ route('tickets.store') }}">
               @csrf
               <div class="mb-3">
                 <label for="quantity" class="form-label">Jumlah</label>

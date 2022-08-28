@@ -63,7 +63,7 @@
 
     @if (Auth::user()->role_id == 1)
     <li class="menu-item">
-      <a href="{{ route('ticket.create') }}" class="menu-link">
+      <a href="{{ route('tickets.create') }}" class="menu-link">
         <i class='menu-icon bx bxs-credit-card-front'></i>
         <div data-i18n="Analytics">Generate New Ticket</div>
       </a>
@@ -81,35 +81,35 @@
 
 
     <li class="menu-item">
-      <a href="{{ route('ticket.early') }}" class="menu-link">
+      <a href="{{ route('phase.ticket.early') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Early</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticket.presale1') }}" class="menu-link">
+      <a href="{{ route('phase.ticket.presale1') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 1</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticket.presale2') }}" class="menu-link">
+      <a href="{{ route('phase.ticket.presale2') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 2</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticket.presale3') }}" class="menu-link">
+      <a href="{{ route('phase.ticket.presale3') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Presale 3</div>
       </a>
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('ticket.ots') }}" class="menu-link">
+      <a href="{{ route('phase.ticket.ots') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket OTS</div>
       </a>
@@ -127,7 +127,7 @@
     <hr>
 
     <li class="menu-item">
-      <a href="{{ route('checkin.index') }}" class="menu-link">
+      <a href="{{ route('checkin.mobile') }}" class="menu-link">
         <i class='menu-icon bx bx-mobile'></i>
         <div data-i18n="Analytics">Checkin Mobile</div>
       </a>

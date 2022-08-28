@@ -10,19 +10,17 @@ use Illuminate\Support\Facades\Session;
 
 class CheckinController extends Controller
 {
-    public function index()
+    public function mobile()
     {
-        return response()->view('checkin.narrow-screen', [
+        return response()->view('checkin.mobile', [
             'title' => 'Checkin',
-            'tickets' => Ticket::all(),
         ]);
     }
 
     public function wide()
     {
-        return response()->view('checkin.wide-screen', [
+        return response()->view('checkin.web', [
             'title' => 'Checkin',
-            'tickets' => Ticket::all(),
         ]);
     }
 
@@ -30,11 +28,9 @@ class CheckinController extends Controller
     {
         return response()->view('checkin.scanner-tools', [
             'title' => 'Checkin',
-            'tickets' => Ticket::all(),
+            'tickets' => Ticket::where('checkin_status', 0)->get(),
         ]);
     }
-
-
 
     public function checkin(Request $request)
     {

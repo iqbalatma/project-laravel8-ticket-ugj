@@ -102,7 +102,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Login Fiesta</title>
 
     <meta name="description" content="" />
 
@@ -206,12 +206,12 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                  <span class="app-brand-text demo text-body fw-bolder">Fiesta</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              <h4 class="mb-2">Selamat Datang di Fiesta!</h4>
+              <p class="mb-4">Silahkan login untuk melanjutkan !</p>
 
               <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -274,16 +274,8 @@
                     <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
                 </div>
             </form>
-
-              {{-- <p class="text-center">
-                <span>Belum punya akun ?</span>
-                <a href="{{ route('register') }}">
-                  <span>Daftar</span>
-                </a>
-              </p> --}}
             </div>
           </div>
-          <!-- /Register -->
         </div>
       </div>
     </div>

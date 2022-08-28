@@ -22,14 +22,6 @@
             <div style="width: 100%" id="reader"></div>
           </div>
         </div>
-
-        <select class="form-select" aria-label="Default select example" id="select-checkin">
-          @foreach ($tickets as $ticket)
-          <option value="{{ $ticket->code }}">{{ $ticket->code }}</option>
-          @endforeach
-        </select>
-
-
       </div>
     </div>
   </div>

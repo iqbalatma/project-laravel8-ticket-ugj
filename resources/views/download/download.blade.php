@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table">
+        <table class="table" id="myTable">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -30,7 +30,7 @@
                   Sudah Didownload
                 </button>
                 @else
-                <a href="/ticket/download/{{ $doc->name }}" class="btn btn-primary">
+                <a href="/download/{{ $doc->name }}" class="btn btn-primary">
                   Download
                 </a>
                 @endif

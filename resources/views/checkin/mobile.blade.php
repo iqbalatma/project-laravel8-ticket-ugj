@@ -6,7 +6,7 @@
     <div class="card h-100">
       <div class="card-header d-flex align-items-center justify-content-between pb-0">
         <div class="card-title mb-0">
-          <h5 class="">Checkin Ticket</h5>
+          <h5 class="">Checkin Ticket Mobile</h5>
         </div>
       </div>
       <div class="card-body">
@@ -18,7 +18,7 @@
         @endif
 
         <div class="d-none d-md-block">
-          <p>Ukuran layar tidak support</p>
+          <p>Ukuran layar tidak support. Khusus untuk ukuran layar mobile</p>
         </div>
 
         <div class="row d-md-none">
@@ -26,13 +26,6 @@
             <div style="width: 100%" id="reader"></div>
           </div>
         </div>
-
-        <select class="form-select" aria-label="Default select example" id="select-checkin">
-          @foreach ($tickets as $ticket)
-          <option value="{{ $ticket->code }}">{{ $ticket->code }}</option>
-          @endforeach
-        </select>
-
       </div>
     </div>
   </div>

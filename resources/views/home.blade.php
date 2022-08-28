@@ -1,8 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="row">
-    <!-- Order Statistics -->
     <div class="order-0 mb-4">
         <div class="card h-100">
             <div class="card-body">
@@ -12,7 +10,6 @@
                         <span>Total Ticket</span>
                     </div>
                 </div>
-
                 <table class="table">
                     <thead>
                         <tr>
@@ -52,6 +49,5 @@
             </div>
         </div>
     </div>
-    <!--/ Order Statistics -->
 </div>
 @endsection

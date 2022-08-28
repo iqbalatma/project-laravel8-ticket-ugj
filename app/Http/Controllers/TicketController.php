@@ -20,12 +20,6 @@ class TicketController extends Controller
         $this->ticketService = new TicketService();
     }
 
-    public function check()
-    {
-        $pdf = PDF::loadView('ticket.pdfticket');
-        return  $pdf->stream();
-    }
-
     /**
      * untuk menampilkan halaman tambah ticket / generate ticket
      */
@@ -73,69 +67,4 @@ class TicketController extends Controller
         }
     }
 
-
-    public function checkin($code)
-    {
-        if (!Ticket::where('code', $code)->first()->checkin_status) {
-            if (Ticket::where('code', $code)->update(['checkin_status' => '1'])) {
-                echo "Ticket berhasil checkin";
-            } else {
-                abort(404);
-            }
-        } else {
-            echo "Tiket sudah checkin";
-        }
-    }
-
-
-    // PHASE TICKET
-    public function early()
-    {
-        $data = [
-            "title" => "Ticket Early",
-            "earlyTickets" => Ticket::with("user")->where('phase_id', 1)->get(),
-        ];
-
-        return response()->view("ticket.ticketearly", $data);
-    }
-
-    public function presale1()
-    {
-        $data = [
-            "title" => "Ticket Presale 1",
-            "earlyTickets" => Ticket::with("user")->where('phase_id', 2)->get(),
-        ];
-
-        return response()->view("ticket.ticketpresale1", $data);
-    }
-
-    public function presale2()
-    {
-        $data = [
-            "title" => "Ticket Presale 2",
-            "earlyTickets" => Ticket::with("user")->where('phase_id', 3)->get(),
-        ];
-
-        return response()->view("ticket.ticketpresale2", $data);
-    }
-
-    public function presale3()
-    {
-        $data = [
-            "title" => "Ticket Presale 3",
-            "earlyTickets" => Ticket::with("user")->where('phase_id', 4)->get(),
-        ];
-
-        return response()->view("ticket.ticketpresale3", $data);
-    }
-
-    public function ots()
-    {
-        $data = [
-            "title" => "Ticket OTS",
-            "earlyTickets" => Ticket::with("user")->where('phase_id', 5)->get(),
-        ];
-
-        return response()->view("ticket.ticketots", $data);
-    }
 }

@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="card-body">
-        <table id="myTable" class="table">
+        <table id="tableUser" class="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -157,8 +157,7 @@
 @section('page-script')
 <script>
   $(document).ready( function () {
-    $('#myTable').DataTable({
-      order: [[2, 'desc']],
+    $('#tableUser').DataTable({
     });
   });
 

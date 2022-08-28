@@ -15,10 +15,10 @@ class DownloadTicketController extends Controller
             "title" => "Download Ticket",
             "docpdf" => DocPdf::all()
         ];
-        return response()->view('docpdf.download', $data);
+        return response()->view('download.download', $data);
     }
 
-    public function postDownload($fileName)
+    public function download($fileName)
     {
         $dataDoc = DocPdf::where("name", $fileName)->first();
         if ($dataDoc->is_printed) {
