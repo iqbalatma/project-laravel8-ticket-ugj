@@ -55,7 +55,7 @@
            let status = result.status;
            let message = result.message;
            if(status==200){
-             return Swal.fire({
+              Swal.fire({
                  icon: "success",
                  title: "Berhasil checkin !",
                  showConfirmButton: false,
@@ -64,7 +64,7 @@
            }
 
            if(status==403){
-             return Swal.fire({
+              Swal.fire({
                icon: 'error',
                title: 'Oops...Ticket anda sudah pernah checkin !',
                showConfirmButton: false,
@@ -73,7 +73,7 @@
            }
 
            if(status==404){
-             return Swal.fire({
+              Swal.fire({
                icon: 'error',
                title: 'Oops...Kode tiket invalid !',
                showConfirmButton: false,
