@@ -43,6 +43,7 @@
   let html5QrcodeScanner = new Html5QrcodeScanner("reader", {fps : 1, qrbox : { width: 600, height: 600 }});
 
   function onScanSuccess(decodedText, decodedResult) {
+      html5QrcodeScanner.pause(true);
        $.ajax({
              url: "{{ route('checkin.checkin') }}",
              type:'POST',
@@ -79,6 +80,10 @@
                      timer: 1500,
              })
            }
+
+           setTimeout(function(){
+              html5QrcodeScanner.resume();
+            }, 1000);
        });
   }
 

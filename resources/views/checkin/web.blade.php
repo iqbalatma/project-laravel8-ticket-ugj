@@ -36,9 +36,11 @@
          }
   });
 
-  let html5QrcodeScanner = new Html5QrcodeScanner("reader", {fps : 1, qrbox : { width: 600, height: 600 }});
+  let html5QrcodeScanner = new Html5QrcodeScanner("reader", {fps : 10, qrbox : { width: 600, height: 600 }}, false);
 
   function onScanSuccess(decodedText, decodedResult) {
+    html5QrcodeScanner.pause(true);
+
        $.ajax({
              url: "{{ route('checkin.checkin') }}",
              type:'POST',
@@ -47,34 +49,38 @@
              },
              context: document.body,
          }).done(function(result) {
+          console.log(result);
            let status = result.status;
            let message = result.message;
+
            if(status==200){
-             return Swal.fire({
-                 icon: "success",
-                 title: "Berhasil checkin !",
-                 showConfirmButton: false,
-                       timer: 1500,
-             });
-           }
+                 Swal.fire({
+                    icon: "success",
+                    title: "Berhasil checkin !",
+                    showConfirmButton: false,
+                          timer: 1500,
+                });
+              }
+              if(status==403){
+                 Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Ticket anda sudah pernah checkin !',
+                  showConfirmButton: false,
+                        timer: 1500,
+                })
+              }
 
-           if(status==403){
-             return Swal.fire({
-               icon: 'error',
-               title: 'Oops...Ticket anda sudah pernah checkin !',
-               showConfirmButton: false,
-                     timer: 1500,
-             })
-           }
-
-           if(status==404){
-             return Swal.fire({
-               icon: 'error',
-               title: 'Oops...Kode tiket invalid !',
-               showConfirmButton: false,
-                     timer: 1500,
-             })
-           }
+              if(status==404){
+                 Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...Kode tiket invalid !',
+                  showConfirmButton: false,
+                        timer: 1500,
+                })
+              }
+           setTimeout(function(){
+              html5QrcodeScanner.resume();
+            }, 1000);
        });
   }
 

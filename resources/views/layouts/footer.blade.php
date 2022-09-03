@@ -6,7 +6,7 @@
       <script>
         document.write(new Date().getFullYear());
       </script>
-      , made with ❤️ by Atma-Dev
+      , by <a href="https://atma-dev.com">Atma-Dev</a>
     </div>
   </div>
 </footer>

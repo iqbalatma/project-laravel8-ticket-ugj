@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
  * DEV
  */
 Route::get('check',  function () {
-    return view('ticket.pdfticket');
+    $pdf = PDF::loadView('ticket.check-pdfticket');
+    return  $pdf->stream();
 });
 
 
