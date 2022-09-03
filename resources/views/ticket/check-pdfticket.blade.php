@@ -168,6 +168,14 @@
       border-color: rgb(255, 255, 255);
       border-width: 0.1rem;
     }
+
+    .number {
+      color: rgb(65, 60, 60);
+      z-index: 15;
+      float: right;
+      margin-top: -15rem;
+      margin-right: 2rem;
+    }
   </style>
 </head>
 
@@ -178,11 +186,15 @@
   $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE2.webp")));
   @endphp
   <div class="ticket-container">
+    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE2.webp') }}" class='ticket'>";
     @php
-    echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
+    // echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
     echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
     @endphp
+    <div class='number'><b>Nomor : 123</b></div>
+
   </div>
+
 </body>
 
 </html>

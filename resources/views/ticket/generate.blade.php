@@ -60,7 +60,7 @@
               <div class="mb-3">
                 <label for="quantity" class="form-label">Jumlah</label>
                 <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" aria-describedby="textHelp" name="quantity"
-                  placeholder="Maksimum 100 per generate operation">
+                  placeholder="Maksimum 1000 per generate operation">
                 @error('quantity')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>

@@ -51,7 +51,7 @@ class TicketService extends Controller
   }
   public function generatePDF()
   {
-    $dataSetTicket = array_chunk($this->dataTicket, 100, true);
+    $dataSetTicket = array_chunk($this->dataTicket, 1000, true);
     $phaseName = str_replace(" ", "_", Phase::find($this->phaseId)->name);
 
     foreach ($dataSetTicket as $key => $ticket) {

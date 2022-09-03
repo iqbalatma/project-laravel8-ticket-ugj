@@ -41,7 +41,7 @@ class TicketController extends Controller
         $validated = $request->validate(
             [
                 'phase_id' => 'required',
-                'quantity' => 'required|numeric|min:2|max:100',
+                'quantity' => 'required|numeric|min:4|max:1000',
             ],
             [
                 'phase_id.required' => 'You have to chose the phase',
@@ -50,7 +50,7 @@ class TicketController extends Controller
 
         $quantity = intval($validated['quantity']);
         $phaseId = intval($validated['phase_id']);
-
+        ini_set('max_execution_time', '300');
 
         if ($this->ticketService->checkLimit($phaseId, $quantity)) {
             $this->ticketService->reduceLimit()

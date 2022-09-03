@@ -160,28 +160,40 @@
       z-index: 10;
       right: 100px;
       float: right;
-      margin-top: -9.2rem;
-      margin-right: 2rem;
-      height: 4rem;
-      width: 4rem;
+      margin-top: -13rem;
+      margin-right: 1rem;
+      height: 6rem;
+      width: 6rem;
       border-style: solid;
       border-color: rgb(255, 255, 255);
       border-width: 0.1rem;
+    }
+
+    .number {
+      color: rgb(65, 60, 60);
+      z-index: 15;
+      float: right;
+      margin-top: -15rem;
+      margin-right: 2rem;
     }
   </style>
 </head>
 
 <body>
-  @foreach ($tickets as $ticket)
   @php
-  $qrCode=QrCode::format('png')->size(512)->generate($ticket->code);
-  $qrCode = base64_encode($qrCode);
-  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE1.webp")));
+  $baseTicket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE2.webp")));
   @endphp
+
+
+  @foreach ($tickets as $ticket)
   <div class="ticket-container">
+
+    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE2.webp') }}" class='ticket'>
     @php
-    echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
+    $qrCode=QrCode::format('png')->size(512)->generate($ticket->code);
+    $qrCode = base64_encode($qrCode);
     echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
+    echo "<div class='number'><b>Nomor : ". $ticket->id."</b></div>"
     @endphp
   </div>
   @endforeach
