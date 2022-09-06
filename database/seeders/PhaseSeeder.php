@@ -31,7 +31,7 @@ class PhaseSeeder extends Seeder
                 'name' => 'Presale 2',
                 'strdate' => '2022-09-14 00:00:00',
                 'fnshdate' => '2022-10-14 00:00:00',
-                'limit' => 2100,
+                'limit' => 2150,
             ],
             [
                 'name' => 'Prelase 3',
