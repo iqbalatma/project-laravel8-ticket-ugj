@@ -15,6 +15,7 @@ use Mpdf\Mpdf;
 
 class TicketController extends Controller
 {
+    private $ticketService;
     public function __construct()
     {
         $this->ticketService = new TicketService();

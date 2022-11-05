@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\DownloadTicketController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketPhasesController;
 use App\Http\Controllers\UserController;
@@ -36,13 +37,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
+// url, class controller, method, middleware, name, http method
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    
     Route::middleware("isSuperadmin")
         ->prefix('users')
         ->name('user.')
