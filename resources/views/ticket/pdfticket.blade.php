@@ -161,9 +161,9 @@
       right: 100px;
       float: right;
       margin-top: -13rem;
-      margin-right: 1rem;
-      height: 6rem;
-      width: 6rem;
+      margin-right: 0.6rem;
+      height: 5.5rem;
+      width: 5.5rem;
       border-style: solid;
       border-color: rgb(255, 255, 255);
       border-width: 0.1rem;
@@ -174,7 +174,7 @@
       z-index: 15;
       float: right;
       margin-top: -15rem;
-      margin-right: 2rem;
+      margin-right: 1rem;
     }
   </style>
 </head>
@@ -188,7 +188,7 @@
   @foreach ($tickets as $ticket)
   <div class="ticket-container">
 
-    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE2.webp') }}" class='ticket'>
+    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE3.webp') }}" class='ticket'>
     @php
     $qrCode=QrCode::format('png')->size(512)->generate($ticket->code);
     $qrCode = base64_encode($qrCode);

@@ -161,9 +161,9 @@
       right: 100px;
       float: right;
       margin-top: -13rem;
-      margin-right: 1rem;
-      height: 6rem;
-      width: 6rem;
+      margin-right: 0.6rem;
+      height: 5.5rem;
+      width: 5.5rem;
       border-style: solid;
       border-color: rgb(255, 255, 255);
       border-width: 0.1rem;
@@ -174,19 +174,20 @@
       z-index: 15;
       float: right;
       margin-top: -15rem;
-      margin-right: 2rem;
+      margin-right: 1rem;
     }
   </style>
 </head>
 
 <body>
+
   @php
-  $qrCode=QrCode::format('png')->size(512)->generate("TOKTOKTO");
+  $qrCode=QrCode::format('png')->size(500)->generate("TOKTOKTO");
   $qrCode = base64_encode($qrCode);
-  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE2.webp")));
+  $ticket = base64_encode(file_get_contents(public_path("/ticket/BASE_TICKET_PRESALE3.webp")));
   @endphp
   <div class="ticket-container">
-    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE2.webp') }}" class='ticket'>";
+    <img src="{{ public_path('ticket/BASE_TICKET_PRESALE3.webp') }}" class='ticket'>";
     @php
     // echo "<img src='data:image/png;base64," . $ticket . "' class='ticket'>";
     echo "<img src='data:image/png;base64," . $qrCode . "' class='qr-code'>";
