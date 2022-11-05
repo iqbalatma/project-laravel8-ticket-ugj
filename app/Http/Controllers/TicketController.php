@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DocPdf;
-use App\Models\Phase;
-use App\Models\Ticket;
+use App\Http\Requests\GenerateTicketRequest;
 use App\Services\TicketService;
-use Illuminate\Http\Request;
-use PDF;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use ZipArchive;
-use File;
-use Mpdf\Mpdf;
+
 
 class TicketController extends Controller
 {
@@ -22,39 +15,28 @@ class TicketController extends Controller
     }
 
     /**
-     * untuk menampilkan halaman tambah ticket / generate ticket
+     * Description : use to show page for generate new ticket
+     * 
+     * @param TicketService $service for get all data for create
      */
-    public function create()
+    public function create(TicketService $service)
     {
-        $data = [
-            "title" => "Generate Ticket",
-            "phases" => Phase::all()
-        ];
-
-        return response()->view('ticket.generate', $data);
+        return response()->view('ticket.generate', $service->getAllDataForCreate());
     }
 
     /**
-     * Operasi untuk melakukan generate ticket
+     * Description : use to generate new ticket
+     * 
+     * 
      */
-    public function store(Request $request)
+    public function store(GenerateTicketRequest $request, TicketService $service)
     {
-        $validated = $request->validate(
-            [
-                'phase_id' => 'required',
-                'quantity' => 'required|numeric|min:4|max:1000',
-            ],
-            [
-                'phase_id.required' => 'You have to chose the phase',
-            ]
-        );
+        $validated = $request->validated();
 
-        $quantity = intval($validated['quantity']);
-        $phaseId = intval($validated['phase_id']);
         ini_set('max_execution_time', '300');
 
-        if ($this->ticketService->checkLimit($phaseId, $quantity)) {
-            $this->ticketService->reduceLimit()
+        if ($service->checkLimit($validated['phase_id'], $validated['quantity'])) {
+            $service->reduceLimit()
                 ->generateData()
                 ->generatePDF();
 

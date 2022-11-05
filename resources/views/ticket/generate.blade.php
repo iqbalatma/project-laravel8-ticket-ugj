@@ -1,30 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-  <div class="col-12">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-      <strong>{{ $message }}</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    @if($message = Session::get("failed"))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>{{ $message }}</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    @if ($message = Session::get('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>{{ $message }}</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-  </div>
-</div>
+<x-alert></x-alert>
 <div class="row">
   <!-- Order Statistics -->
   <div class="order-0 mb-4">
@@ -75,7 +52,6 @@
                   <option value="2">Presale 1</option>
                   <option value="3">Presale 2</option>
                   <option value="4">Presale 3</option>
-                  <option value="5">OTS</option>
                 </select>
                 @error('phase_id')
                 <span class="invalid-feedback" role="alert">

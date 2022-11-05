@@ -39,12 +39,6 @@ class PhaseSeeder extends Seeder
                 'fnshdate' => '2022-10-30 00:00:00',
                 'limit' => 900,
             ],
-            [
-                'name' => 'OTS',
-                'strdate' => '2022-11-12 00:00:00',
-                'fnshdate' => '2022-11-12 00:00:00',
-                'limit' => 800,
-            ]
         ];
 
         foreach ($dataPhase as $key => $phase) {
