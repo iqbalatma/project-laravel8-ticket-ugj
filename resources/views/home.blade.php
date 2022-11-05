@@ -39,11 +39,6 @@
                             <th scope="row">{{ $totalTicketPresale3 }}</th>
                             <th scope="row">{{ $totalTicketPresale3Checkin }}</th>
                         </tr>
-                        <tr>
-                            <th scope="row">Tiket Fase OTS</th>
-                            <th scope="row">{{ $totalTicketOTS }}</th>
-                            <th scope="row">{{ $totalTicketOTSCheckin }}</th>
-                        </tr>
                     </tbody>
                 </table>
             </div>
