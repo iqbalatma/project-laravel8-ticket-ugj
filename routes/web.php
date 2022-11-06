@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
         ->controller(TicketPhasesController::class)
         ->name('phase.ticket.')
         ->group(function () {
+            Route::get('/all', 'all')->name('all');
             Route::get('/early', 'early')->name('early');
             Route::get('/presale1', 'presale1')->name('presale1');
             Route::get('/presale2', 'presale2')->name('presale2');

@@ -15,6 +15,7 @@ class Ticket extends Model
         'is_printed',
         'is_generated',
         'phase_id',
+        'user_id'
     ];
 
 

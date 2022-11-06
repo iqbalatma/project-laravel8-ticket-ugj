@@ -81,6 +81,14 @@
 
 
     <li class="menu-item">
+      <a href="{{ route('phase.ticket.all') }}" class="menu-link">
+        <i class='menu-icon bx bx-qr'></i>
+        <div data-i18n="Analytics">All Tickets</div>
+      </a>
+    </li>
+
+
+    <li class="menu-item">
       <a href="{{ route('phase.ticket.early') }}" class="menu-link">
         <i class='menu-icon bx bx-qr'></i>
         <div data-i18n="Analytics">Ticket Phase Early</div>

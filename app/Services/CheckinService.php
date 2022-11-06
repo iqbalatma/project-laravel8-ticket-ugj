@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repository\TicketRepository;
 use App\Statics\GlobalStatic;
+use Illuminate\Support\Facades\Auth;
 
 class CheckinService{
   public function getScannerToolData():array
@@ -27,7 +28,10 @@ class CheckinService{
         ];
       }
 
-      (new TicketRepository())->updateTicketToCheckedIn($code);
+      (new TicketRepository())->updateTicketToCheckedIn($code,[
+        'checkin_status' => GlobalStatic::STATUS_CHECKIN,
+        'user_id' => Auth::user()->id,
+      ]);
       return [
         'status' => GlobalStatic::CHECKIN_SUCCESS
       ];

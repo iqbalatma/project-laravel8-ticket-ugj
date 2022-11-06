@@ -16,10 +16,10 @@ class TicketRepository{
     return Ticket::where('code', $code)->first();
   }
 
-  public function updateTicketToCheckedIn(string $code)
+  public function updateTicketToCheckedIn(string $code, array $requestedData)
   {
     return Ticket::where('code', $code)
-      ->update(['checkin_status' => GlobalStatic::STATUS_CHECKIN]);
+      ->update($requestedData);
   }
 }
 

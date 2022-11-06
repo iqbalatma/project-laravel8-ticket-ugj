@@ -6,6 +6,14 @@ use App\Models\Ticket;
 
 class TicketPhasesController extends Controller
 {
+    public function all()
+    {
+        return response()->view("phase.all", [
+            "title" => "All Ticket Ticket",
+            "earlyTickets" => Ticket::with(["user","phase"])->get(),
+        ]);
+    }
+
     public function early()
     {
         return response()->view("phase.early", [
