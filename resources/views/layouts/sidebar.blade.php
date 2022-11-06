@@ -127,7 +127,7 @@
     </li>
 
     <li class="menu-item">
-      <a href="{{ route('checkin.wide') }}" class="menu-link">
+      <a href="{{ route('checkin.web') }}" class="menu-link">
         <i class='menu-icon bx bxs-check-circle'></i>
         <div data-i18n="Analytics">Checkin Website</div>
       </a>

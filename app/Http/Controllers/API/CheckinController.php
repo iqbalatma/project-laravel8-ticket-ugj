@@ -3,40 +3,40 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ticket;
+use App\Http\Requests\CheckinRequest;
+use App\Services\CheckinService;
+use App\Statics\GlobalStatic;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CheckinController extends Controller
 {
-  public function checkin(Request $request)
+  public function checkin(CheckinRequest $request, CheckinService $service)
   {
-    $code = $request->all()['code'];
-    $ticket = Ticket::where('code', $code)->first();
-    $mytime = Carbon::now();
-    $mytime->toDateTimeString();
+    $status = $service->checkin($request->validated());
+    $currentTime = Carbon::now()->toDateTimeString();
 
-    if ($ticket) {
-      if ($ticket->checkin_status) {
-        return response()->json([
-          "message" => "Ticket is already checkin !",
-          "status" => 403,
-          "timestamp" => $mytime
-        ])->setStatusCode(200);;
-      }
-
-      Ticket::where('code', $code)->update(['checkin_status' => '1']);
+    if($status == GlobalStatic::CHECKIN_SUCCESS){
       return response()->json([
         "message" => "Checkin successfuly !",
-        "status" => 200,
-        "timestamp" => $mytime
+        "status" => JsonResponse::HTTP_OK,
+        "timestamp" => $currentTime
+      ])->setStatusCode(JsonResponse::HTTP_OK);;
+    }
 
+    if($status == GlobalStatic::CHECKIN_ALREADY_CHECKIN){
+      return response()->json([
+        "message" => "Ticket is already checkin !",
+        "status" => JsonResponse::HTTP_FORBIDDEN,
+        "timestamp" => $currentTime
       ])->setStatusCode(200);;
-    } else {
+    }
+
+    if($status == GlobalStatic::CHECKIN_CODE_INVALID){
       return response()->json([
         "message" => "Code is invalid !",
-        "status" => 404,
-        "timestamp" => $mytime
+        "status" => JsonResponse::HTTP_NOT_FOUND,
+        "timestamp" => $currentTime
       ])->setStatusCode(200);
     }
   }

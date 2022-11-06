@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CheckinController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
 
-//Protecting Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/checkin', [App\Http\Controllers\API\CheckinController::class, 'checkin']);
-});
+Route::post('/checkin', [CheckinController::class, 'checkin'])
+    ->name('api.checkin')
+    ->middleware('auth');

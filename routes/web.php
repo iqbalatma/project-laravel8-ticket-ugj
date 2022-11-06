@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CheckinController as APICheckinController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\DownloadTicketController;
 use App\Http\Controllers\HomeController;
@@ -58,10 +59,19 @@ Route::middleware('auth')->group(function () {
         ->name('checkin.')
         ->group(function () {
             Route::get('/mobile', 'mobile')->name('mobile');
-            Route::get('/wide', 'wide')->name('wide');
+            Route::get('/web', 'web')->name('web');
             Route::get('/scanner-tools', 'scannerTool')->name('scanner-tools');
+        });
+    
+    Route::prefix("checkin")
+        ->controller(APICheckinController::class)
+        ->name('checkin.')
+        ->group(function () {
             Route::post('/', 'checkin')->name('checkin');
         });
+    
+
+    
 
     Route::prefix("phase/ticket")
         ->controller(TicketPhasesController::class)
