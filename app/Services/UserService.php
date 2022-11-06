@@ -18,4 +18,11 @@ class UserService{
     $requestedData['password'] = bcrypt($requestedData['password']);
     return (new UserRepository())->addNewDataUser($requestedData);
   }
+
+  public function updateDataUser(array $requestedData)
+  {
+    $requestedData['password'] = bcrypt($requestedData['password']);
+
+    return (new UserRepository())->updateDataUserById($requestedData['id'], $requestedData);
+  }
 }

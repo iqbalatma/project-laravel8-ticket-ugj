@@ -26,20 +26,20 @@ class UserController extends Controller
             ->with('success', 'Add new user successfuly');
     }
 
-    public function update(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request, UserService $service)
     {
-        $validated =  $request->validated();
-        $validated['password'] = bcrypt($validated['password']);
+        $updated = $service->updateDataUser($request->validated());
 
-        $user = User::where('id', $validated['id']);
-        $dataUser = $user->first();
-        $user->update($validated);
-        PersonalAccessToken::where('tokenable_id', $dataUser->id)
-            ->delete();
-
-        return redirect()
-            ->route('user.index')
-            ->with('success', 'Update ' . $validated['name'] . ' successfuly');
+        if($updated){
+            return redirect()
+                ->route('user.index')
+                ->with('success', 'Update ' . $request->validated()['name'] . ' successfuly !');
+        }else{
+            return redirect()
+                ->route('user.index')
+                ->with('failed', 'Update ' . $request->validated()['name'] . ' failed !');
+        }
+        
     }
 
     public function delete(Request $request)

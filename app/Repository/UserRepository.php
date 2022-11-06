@@ -16,6 +16,11 @@ class UserRepository{
     return User::create($requestedData);
   }
 
+  public function updateDataUserById(int $id, array $requestedData):bool
+  {
+    return User::where('id', $id)->update($requestedData);
+  }
+
   
 }
 ?>
