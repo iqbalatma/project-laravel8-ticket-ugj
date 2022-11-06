@@ -144,6 +144,10 @@
         $('#myTable').DataTable({
           order: [[2, 'desc']],
         });
+
+        $('#table-download-doc').DataTable({
+          order: [[2, 'asc']],
+        });
       } );
     </script>
   </body>

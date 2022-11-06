@@ -71,7 +71,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/presale1', 'presale1')->name('presale1');
             Route::get('/presale2', 'presale2')->name('presale2');
             Route::get('/presale3', 'presale3')->name('presale3');
-            Route::get('/ots', 'ots')->name('ots');
         });
 
 

@@ -3,30 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\DocPdf;
-use ZipArchive;
-use File;
-
+use App\Services\DownloadTicketService;
 
 class DownloadTicketController extends Controller
 {
-    public function index()
+    public function index(DownloadTicketService $service)
     {
-        $data = [
-            "title" => "Download Ticket",
-            "docpdf" => DocPdf::all()
-        ];
-        return response()->view('download.download', $data);
+        return response()->view('download.download', $service->getAllDataTicketDocument());
     }
 
-    public function download($fileName)
+    public function download(DownloadTicketService $service, string $fileName)
     {
-        $dataDoc = DocPdf::where("name", $fileName)->first();
-        if ($dataDoc->is_printed) {
+        $downlodedFile = $service->downloadDocPdf($fileName);
+
+        if(!$downlodedFile){
             return redirect()->route('downloadticket.index')->with('failed', "Ticket already downloaded !");
         }
-
-        $dataDoc->is_printed = 1;
-        $dataDoc->save();
-        return response()->download("ticket/$fileName");
+       
+        return response()->download("ticket/$downlodedFile");
     }
 }

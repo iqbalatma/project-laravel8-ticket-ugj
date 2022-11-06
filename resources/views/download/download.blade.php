@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<x-alert></x-alert>
+
 <div class="row">
   <!-- Order Statistics -->
   <div class="order-0 mb-4">
@@ -11,7 +13,7 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table" id="myTable">
+        <table class="table" id="table-download-doc">
           <thead>
             <tr>
               <th scope="col">ID</th>
