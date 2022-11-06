@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="card-body">
-        <table id="myTable" class="table">
+        <table id="ticket-early" class="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -43,4 +43,17 @@
   </div>
   <!--/ Order Statistics -->
 </div>
+@endsection
+
+@section('page-script')
+<script>
+  $(document).ready( function () {
+    $('#ticket-early').DataTable({
+      order: [
+        [2, 'desc'],
+        [3, 'desc'],
+      ],
+    });
+  })
+</script>
 @endsection

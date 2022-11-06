@@ -9,6 +9,8 @@ class GlobalStatic {
   public const CHECKIN_ALREADY_CHECKIN = "already_checkin";
 
   public const STATUS_CHECKIN = 1;
+
+  public const ROLE_TICKETING = 4;
 }
 
 ?>

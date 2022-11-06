@@ -6,25 +6,20 @@ use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function index(): Response
+    public function index(UserService $service): Response
     {
-        return response()->view('users.index', [
-            'title' => 'User',
-            'users' => User::where('role_id', 4)->get()
-        ]);
+        return response()->view('users.index', $service->getAllDataUser());
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request, UserService $service)
     {
-        $validated = $request->validated();
-        $validated['password'] = bcrypt($validated['password']);
-        User::create($validated);
+        $service->addNewDataUserTicketing($request->validated());
 
         return redirect()
             ->route('user.index')
