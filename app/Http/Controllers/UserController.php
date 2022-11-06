@@ -42,11 +42,17 @@ class UserController extends Controller
         
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, UserService $service)
     {
-        $userId = $request->all()['id'];
-        User::destroy($userId);
-        PersonalAccessToken::where('tokenable_id', $userId)->delete();
-        return redirect()->route('user.index')->with('success', 'Delete user successfuly');
+        $deleted = $service->deleteDataUser($request->input('id'));
+        if($deleted){
+            return redirect()
+                ->route('user.index')
+                ->with('success', 'Delete user successfuly');
+        }else{
+            return redirect()
+                ->route('user.index')
+                ->with('failed', 'Delete user failed');
+        }
     }
 }

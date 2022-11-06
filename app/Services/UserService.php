@@ -1,7 +1,6 @@
 <?php 
 namespace App\Services;
 
-use App\Models\User;
 use App\Repository\UserRepository;
 
 class UserService{
@@ -24,5 +23,10 @@ class UserService{
     $requestedData['password'] = bcrypt($requestedData['password']);
 
     return (new UserRepository())->updateDataUserById($requestedData['id'], $requestedData);
+  }
+
+  public function deleteDataUser(int $id)
+  {
+    return (new UserRepository())->deleteDataUserById($id);
   }
 }

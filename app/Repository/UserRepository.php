@@ -21,6 +21,11 @@ class UserRepository{
     return User::where('id', $id)->update($requestedData);
   }
 
+  public function deleteDataUserById(int $id)
+  {
+    return User::destroy($id);
+  }
+
   
 }
 ?>
