@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Repository\TicketRepository;
 use App\Statics\GlobalStatic;
-use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
 
 class CheckinService{
   public function getScannerToolData():array
@@ -16,20 +14,27 @@ class CheckinService{
    ];
   }
 
-  public function checkin(array $requestedData)
+  public function checkin(array $requestedData):array
   {
     $code = $requestedData['code'];
     $ticket = (new TicketRepository())->getDataTicketByCode($code);
 
     if($ticket){
       if($ticket->checkin_status){
-        return GlobalStatic::CHECKIN_ALREADY_CHECKIN;
+        return [
+          'status' =>GlobalStatic::CHECKIN_ALREADY_CHECKIN,
+          'checkin_date' => $ticket->updated_at->format('H:i:s')
+        ];
       }
 
       (new TicketRepository())->updateTicketToCheckedIn($code);
-      return GlobalStatic::CHECKIN_SUCCESS;
+      return [
+        'status' => GlobalStatic::CHECKIN_SUCCESS
+      ];
     }else{
-      return GlobalStatic::CHECKIN_CODE_INVALID;
+      return [
+        'status' => GlobalStatic::CHECKIN_CODE_INVALID
+      ];
     }
   }
 

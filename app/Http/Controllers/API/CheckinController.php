@@ -13,7 +13,8 @@ class CheckinController extends Controller
 {
   public function checkin(CheckinRequest $request, CheckinService $service)
   {
-    $status = $service->checkin($request->validated());
+    $checkinData = $service->checkin($request->validated());
+    $status = $checkinData['status'];
     $currentTime = Carbon::now()->toDateTimeString();
 
     if($status == GlobalStatic::CHECKIN_SUCCESS){
@@ -28,8 +29,9 @@ class CheckinController extends Controller
       return response()->json([
         "message" => "Ticket is already checkin !",
         "status" => JsonResponse::HTTP_FORBIDDEN,
-        "timestamp" => $currentTime
-      ])->setStatusCode(200);;
+        "timestamp" => $currentTime,
+        "checkin_date" => $checkinData["checkin_date"]  
+      ])->setStatusCode(JsonResponse::HTTP_FORBIDDEN);;
     }
 
     if($status == GlobalStatic::CHECKIN_CODE_INVALID){
@@ -37,7 +39,7 @@ class CheckinController extends Controller
         "message" => "Code is invalid !",
         "status" => JsonResponse::HTTP_NOT_FOUND,
         "timestamp" => $currentTime
-      ])->setStatusCode(200);
+      ])->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
     }
   }
 }

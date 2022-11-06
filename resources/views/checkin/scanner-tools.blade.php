@@ -48,22 +48,21 @@
                 },
                 context: document.body,
             }).done(function(result) {
-              console.log(result);
               let status = result.status;
               let message = result.message;
-              if(status==200){
-                return Swal.fire({
+
+              return Swal.fire({
                     icon: "success",
                     title: "Berhasil checkin !",
                     showConfirmButton: false,
                     timer: 1500,
-                });
-              }
-
+              });
+            }).fail(function(result){
+              const status = result.status;
               if(status==403){
                 return Swal.fire({
                   icon: 'error',
-                  title: `Oops...Ticket anda sudah pernah checkin pada ${result.checkin_date}!`,
+                  title: `Oops...Ticket anda sudah pernah checkin pada ${result.responseJSON.checkin_date}!`,
                   showConfirmButton: false,
                   timer: 1500,
                 })

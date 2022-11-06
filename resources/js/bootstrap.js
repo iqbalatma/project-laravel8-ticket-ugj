@@ -1,7 +1,11 @@
+import Swal from "sweetalert2";
+
 window._ = require('lodash');
+window.Swal = Swal;
 
 try {
     require('bootstrap');
+    require('@selectize/selectize');
 } catch (e) {}
 
 /**
