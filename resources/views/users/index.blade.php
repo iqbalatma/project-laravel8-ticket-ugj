@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<x-alert></x-alert>
 <div class="row">
   <!-- Order Statistics -->
   <div class="order-0 mb-4">
@@ -11,14 +12,6 @@
         </div>
       </div>
       <div class="card-body">
-
-        @if(Session::has('success'))
-        <div class="alert alert-primary" role="alert">
-          {{ Session::get('success') }}
-        </div>
-        @endif
-
-
         <form action="{{ route('user.store') }}" method="POST">
           @csrf
           <div class="mb-3">
