@@ -23,10 +23,10 @@ use Illuminate\Support\Facades\Route;
 /**
  * DEV
  */
-Route::get('check',  function () {
-    $pdf = PDF::loadView('ticket.check-pdfticket');
-    return  $pdf->stream();
-});
+// Route::get('check',  function () {
+//     $pdf = PDF::loadView('ticket.check-pdfticket');
+//     return  $pdf->stream();
+// });
 
 
 /**
@@ -39,7 +39,6 @@ Route::get('/', function () {
 Auth::routes();
 
 
-// url, class controller, method, middleware, name, http method
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
