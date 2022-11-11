@@ -40,7 +40,7 @@
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
   });
 
-  let html5QrcodeScanner = new Html5QrcodeScanner("reader", {fps : 1, qrbox : { width: 600, height: 600 }});
+  let html5QrcodeScanner = new Html5QrcodeScanner("reader", {fps : 10, qrbox : { width: 600, height: 600 }});
 
   function onScanSuccess(decodedText, decodedResult) {
       html5QrcodeScanner.pause(true);
